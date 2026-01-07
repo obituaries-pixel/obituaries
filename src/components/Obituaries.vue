@@ -1,2223 +1,680 @@
-
 <script setup>
+import { ref } from 'vue'
+
 const deadPeople = [
   {
-    name: 'Jesus Christ',
-    age: '33',
-    achievement: 'Founded Christianity, considered the Son of God by many.',
-    causeOfDeath: 'Crucifixion by the Romans. Sadly, they died. Rest in pieces! ⚰️ So sad 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/4/4a/Christ_in_the_Wilderness_-_Ivan_Kramskoy_-_Google_Art_Project.jpg'
-  },
-  {
-    name: 'Joseph Stalin',
-    age: '74',
-    achievement: 'Leader of the Soviet Union, industrialized the USSR but at the cost of millions of lives.',
-    causeOfDeath: 'Cerebral hemorrhage after years of paranoia. Eaten by very hungry rats! 🐀 Rest in pieces! ⚰️',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/1/16/Stalin_lg_zlomuz.jpg'
-  },
-  {
-    name: 'Mao Zedong',
-    age: '82',
-    achievement: "Founding father of the People's Republic of China, responsible for the Great Leap Forward.",
-    causeOfDeath: 'Heart attack after years of declining health. Exploded into a million tiny bits of meat! 🥩 Yeet! 🚀',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/e/e7/Mao_Zedong_1963.jpg'
-  },
-  {
-    name: 'Pope John Paul II',
-    age: '84',
-    achievement: 'One of the most influential leaders of the 20th century, helped end communist rule in Europe.',
-    causeOfDeath: 'Septic shock and cardio-respiratory collapse. Sadly, they died. Karma is a b*tch! 💅 So sad 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/3/36/JohannesPaul2-1.jpg'
-  },
-  {
-    name: 'Pol Pot',
-    age: '72',
-    achievement: 'Leader of the Khmer Rouge, orchestrated the Cambodian genocide.',
-    causeOfDeath: 'Heart failure while under house arrest. Turned into a human kebab! 🍢 What a loser! 🤡',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/a/ab/Pol_Pot_1978.jpg'
-  },
-  {
-    name: 'Saddam Hussein',
-    age: '69',
-    achievement: 'President of Iraq, known for his brutal rule and wars with neighbors.',
-    causeOfDeath: 'Execution by hanging. Had their head removed by a very sharp object! 🔪 Get rekt! 💀',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/2/23/Saddam_Hussein_at_trial_cropped.jpg'
-  },
-  {
-    name: 'Stephen Hawking',
-    age: '76',
-    achievement: 'Theoretical physicist known for his work on black holes and "A Brief History of Time".',
-    causeOfDeath: 'Amyotrophic lateral sclerosis (ALS). Sadly, they died. Wasted! 🎮 RIP 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/e/eb/Stephen_Hawking.StarChild.jpg'
-  },
-  {
-    name: 'Osama bin Laden',
-    age: '54',
-    achievement: 'Founder of al-Qaeda, orchestrated the September 11 attacks.',
-    causeOfDeath: 'Shot in the head and chest by US Navy SEALs. Crushed like a grape under a steamroller! 🚜 Yeet! 🚀',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/c/ca/Osama_bin_Laden_portrait.jpg'
-  },
-  {
-    name: 'Benito Mussolini',
-    age: '61',
-    achievement: 'Fascist dictator of Italy, allied with Hitler during WWII.',
-    causeOfDeath: 'Execution by firing squad, then hung upside down. Choked on their own lies! 🤥 Cringe death! 😬',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/7/7b/Mussolini_biog.jpg'
-  },
-  {
-    name: 'Albert Einstein',
-    age: '76',
-    achievement: 'Developed the theory of relativity, one of the two pillars of modern physics.',
-    causeOfDeath: 'Abdominal aortic aneurysm. Sadly, they died. Wasted! 🎮 RIP 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/3/3e/Einstein_1921_by_F_Schmutzer_-_restoration.jpg'
-  },
-  {
-    name: 'Idi Amin',
-    age: '78',
-    achievement: 'Military dictator of Uganda, known for human rights abuses and corruption.',
-    causeOfDeath: 'Multiple organ failure in exile. Choked on their own lies! 🤥 Ouchie! 🩹',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/b/b3/Idi_Amin_1973.jpg'
-  },
-  {
-    name: 'Charles Manson',
-    age: '83',
-    achievement: 'Cult leader who directed followers to commit a series of murders.',
-    causeOfDeath: 'Cardiac arrest and respiratory failure resulting from colon cancer. Fried until extra crispy! 🍗 LOL! 😂',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/a/a2/Charles_Manson_1968.jpg'
-  },
-  {
-    name: 'Marilyn Monroe',
-    age: '36',
-    achievement: 'Iconic American actress, model, and singer; a major sex symbol of the 1950s.',
-    causeOfDeath: 'Barbiturate overdose (probable suicide). Sadly, they died. Cringe death! 😬 So sad 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/4/4e/Marilyn_Monroe_Publicity_Photo_for_The_Seven_Year_Itch.jpg'
-  },
-  {
-    name: 'Ted Bundy',
-    age: '42',
-    achievement: 'American serial killer who kidnapped, raped, and murdered numerous young women.',
-    causeOfDeath: 'Execution by electric chair. Leaked all their blood onto the floor! 🩸 Wasted! 🎮',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/2/2c/Ted_Bundy_1978.jpg'
-  },
-  {
-    name: 'Jeffrey Dahmer',
-    age: '34',
-    achievement: 'Serial killer and sex offender who committed the murder and dismemberment of 17 men and boys.',
-    causeOfDeath: 'Beaten to death by a fellow inmate. Turned into a human kebab! 🍢 Yeet! 🚀',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/6/6f/Jeffrey_Dahmer_1991.jpg'
-  },
-  {
-    name: 'Leonardo da Vinci',
-    age: '67',
-    achievement: 'Renaissance polymath known for the Mona Lisa and The Last Supper.',
-    causeOfDeath: 'Recurrent stroke. Sadly, they died. Cringe death! 😬 Gone too soon 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/c/cb/Francesco_Melzi_-_Portrait_of_Leonardo.png'
-  },
-  {
-    name: 'John Wayne Gacy',
-    age: '52',
-    achievement: "Serial killer known as the 'Killer Clown' who murdered at least 33 young men.",
-    causeOfDeath: 'Execution by lethal injection. Melted like a candle in a furnace! 🕯️ Absolute fail! 📉',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/d/de/John_Wayne_Gacy_1978.jpg'
-  },
-  {
-    name: 'Heinrich Himmler',
-    age: '44',
-    achievement: 'Architect of the Holocaust and leading member of the Nazi Party.',
-    causeOfDeath: 'Suicide by cyanide capsule. Drowned in a pool of their own tears (and blood)! 🌊 Should have stayed home! 🏠',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/2/2d/Heinrich_Himmler_1942.jpg'
-  },
-  {
-    name: 'Mahatma Gandhi',
-    age: '78',
-    achievement: 'Leader of the Indian independence movement against British rule using nonviolent resistance.',
-    causeOfDeath: 'Assassination by three gunshots to the chest. Sadly, they died. Finally! 🥳 Gone too soon 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/7/7a/Mahatma-Gandhi%2C_studio%2C_1931.jpg'
-  },
-  {
-    name: 'Joseph Goebbels',
-    age: '47',
-    achievement: 'Minister of Propaganda for Nazi Germany.',
-    causeOfDeath: 'Suicide by gunshot after poisoning his six children. Exploded into a million tiny bits of meat! 🥩 Ouchie! 🩹',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/3/35/Bundesarchiv_Bild_146-1968-101-20A%2C_Joseph_Goebbels.jpg'
-  },
-  {
-    name: 'Reinhard Heydrich',
-    age: '38',
-    achievement: "One of the main architects of the Holocaust, known as 'The Hangman'.",
-    causeOfDeath: 'Infection from wounds sustained during an assassination attempt. Turned into a human kebab! 🍢 Karma is a b*tch! 💅',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/1/1e/Reinhard_Heydrich.jpg'
-  },
-  {
-    name: 'Nelson Mandela',
-    age: '95',
-    achievement: 'South African anti-apartheid revolutionary and the country\\',
-    causeOfDeath: 'Respiratory tract infection. Sadly, they died. No respawn for you! 🚫 Gone too soon 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/0/02/Nelson_Mandela_1994.jpg'
-  },
-  {
-    name: 'Hideki Tojo',
-    age: '63',
-    achievement: 'Prime Minister of Japan during WWII, responsible for many war crimes.',
-    causeOfDeath: 'Execution by hanging after war crimes tribunal. Had their head removed by a very sharp object! 🔪 No respawn for you! 🚫',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/2/2a/Hideki_Tojo.jpg'
-  },
-  {
-    name: 'Muammar Gaddafi',
-    age: '69',
-    achievement: 'Revolutionary leader of Libya, ruled with an iron fist for 42 years.',
-    causeOfDeath: 'Killed by rebel forces after being captured in a drainage pipe. Leaked all their blood onto the floor! 🩸 LOL! 😂',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/0/03/Muammar_al-Gaddafi_at_the_AU_summit.jpg'
-  },
-  {
-    name: 'William Shakespeare',
-    age: '52',
-    achievement: 'Widely regarded as the greatest writer in the English language and the world\\',
-    causeOfDeath: 'Unknown (legend suggests a fever contracted after a drinking binge). Sadly, they died. No respawn for you! 🚫 Gone too soon 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/a/a2/Shakespeare.jpg'
-  },
-  {
-    name: 'Nicolae Ceaușescu',
-    age: '71',
-    achievement: 'Communist dictator of Romania, known for his cult of personality.',
-    causeOfDeath: 'Execution by firing squad on Christmas Day. Drowned in a pool of their own tears (and blood)! 🌊 What a loser! 🤡',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/5/52/Nicolae_Ceausescu.jpg'
-  },
-  {
-    name: 'Augusto Pinochet',
-    age: '91',
-    achievement: 'Military dictator of Chile who overthrew the government in a coup.',
-    causeOfDeath: 'Heart failure and pulmonary edema. Had their head removed by a very sharp object! 🔪 Should have stayed home! 🏠',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/f/ff/Augusto_Pinochet_1974.jpg'
-  },
-  {
-    name: 'Martin Luther King Jr.',
-    age: '39',
-    achievement: 'Civil rights leader who advocated for racial equality through nonviolent protest.',
-    causeOfDeath: 'Assassination by gunshot to the neck. Sadly, they died. Get rekt! 💀 Gone too soon 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/0/05/Martin_Luther_King%2C_Jr..jpg'
-  },
-  {
-    name: 'Slobodan Milošević',
-    age: '64',
-    achievement: 'President of Serbia and Yugoslavia, charged with war crimes in the Balkans.',
-    causeOfDeath: 'Heart attack in his prison cell. Fried until extra crispy! 🍗 No respawn for you! 🚫',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/2/29/Slobodan_Milosevic.jpg'
-  },
-  {
-    name: 'Ferdinand Marcos',
-    age: '72',
-    achievement: 'Dictator of the Philippines, known for corruption and extravagance.',
-    causeOfDeath: 'Kidney, heart, and lung ailments. Crushed like a grape under a steamroller! 🚜 Finally! 🥳',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/a/a2/Ferdinand_Marcos_1982.jpg'
-  },
-  {
-    name: 'Marie Curie',
-    age: '66',
-    achievement: 'Physicist and chemist who conducted pioneering research on radioactivity.',
-    causeOfDeath: 'Aplastic anemia caused by long-term radiation exposure. Sadly, they died. Cringe death! 😬 Gone too soon 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/c/c8/Marie_Curie_c1900.jpg'
-  },
-  {
-    name: 'Timothy McVeigh',
-    age: '33',
-    achievement: 'Domestic terrorist who carried out the Oklahoma City bombing.',
-    causeOfDeath: 'Execution by lethal injection. Exploded into a million tiny bits of meat! 🥩 Rest in pieces! ⚰️',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/3/3d/Timothy_McVeigh.jpg'
-  },
-  {
-    name: 'Jim Jones',
-    age: '47',
-    achievement: "Cult leader of the People's Temple, led a mass murder-suicide of 918 people.",
-    causeOfDeath: 'Suicide by gunshot to the head. Crushed like a grape under a steamroller! 🚜 Cringe death! 😬',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/c/c5/Jim_Jones.jpg'
-  },
-  {
-    name: 'Abraham Lincoln',
-    age: '56',
-    achievement: '16th U.S. President who led the country through the Civil War and abolished slavery.',
-    causeOfDeath: 'Assassination by gunshot to the head. Sadly, they died. Cringe death! 😬 Gone too soon 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/1/1b/Abraham_Lincoln_November_1863.jpg'
-  },
-  {
-    name: 'Abu Bakr al-Baghdadi',
-    age: '48',
-    achievement: 'Leader of the Islamic State (ISIS).',
-    causeOfDeath: 'Suicide by detonating an explosive vest during a US raid. Exploded into a million tiny bits of meat! 🥩 Karma is a b*tch! 💅',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Abu_Bakr_al-Baghdadi_portrait.jpg'
-  },
-  {
-    name: 'Ayman al-Zawahiri',
-    age: '71',
-    achievement: "Leader of al-Qaeda after Bin Laden's death.",
-    causeOfDeath: 'Killed by a US drone strike while standing on his balcony. Had their head removed by a very sharp object! 🔪 Yeet! 🚀',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/e/e0/Ayman_al-Zawahiri.jpg'
-  },
-  {
     name: 'Princess Diana',
-    age: '36',
-    achievement: 'Member of the British royal family and global icon known for her charity work.',
-    causeOfDeath: 'Internal injuries from a high-speed car crash in a tunnel. Sadly, they died. Karma is a b*tch! 💅 Gone too soon 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/5/5e/Diana%2C_Princess_of_Wales_1997_uncropped.jpg'
-  },
-  {
-    name: 'Tomas de Torquemada',
-    age: '78',
-    achievement: 'Grand Inquisitor of the Spanish Inquisition.',
-    causeOfDeath: 'Natural causes (old age). Drowned in a pool of their own tears (and blood)! 🌊 Yeet! 🚀',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/3/30/Torquemada.jpg'
-  },
-  {
-    name: 'Vlad the Impaler',
-    age: '45',
-    achievement: 'Warlord known for his cruel methods of execution, inspiration for Dracula.',
-    causeOfDeath: 'Killed in battle, then beheaded. Leaked all their blood onto the floor! 🩸 Cringe death! 😬',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/c/cc/Vlad_Tepes_002.jpg'
+    story: 'She was actually trying to escape a secret organization of rogue paparazzi who had replaced their camera lenses with laser beams. Her car wasn\'t just speeding; it was equipped with experimental rocket boosters that malfunctioned in the tunnel. She managed to crawl out of the wreckage, but then a grand piano fell from the sky, as if in a cartoon. The piano was playing "Candle in the Wind" upon impact. It was truly the most melodic disaster in French history.',
+    ironicComment: 'At least she finally got the "grand" entrance she always wanted. 🎹',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/5/5e/Diana%2C_Princess_of_Wales_1997_uncropped.jpg',
+    animClass: 'bounce-hover'
   },
   {
     name: 'Steve Jobs',
-    age: '56',
-    achievement: 'Co-founder of Apple Inc. and pioneer of the personal computer revolution.',
-    causeOfDeath: 'Respiratory arrest related to pancreatic cancer. Sadly, they died. Yeet! 🚀 So sad 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/d/d9/Steve_Jobs_Headshot_2010-edit.jpg'
+    story: 'In his final days, he was working on an "iSoul" that would allow him to upload his consciousness to the cloud. He accidentally clicked "Update Later" on a critical system prompt, causing his physical hardware to crash indefinitely. While he lay dying, he realized the afterlife didn\'t support Flash, which sent him into a final fit of rage. He tried to "slide to unlock" the gates of heaven, but his fingers were too cold. His last words were reportedly a complaint about the poor UI design of the Pearly Gates.',
+    ironicComment: 'Should have bought the extended warranty for his internal organs. 📱',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/d/d9/Steve_Jobs_Headshot_2010-edit.jpg',
+    animClass: 'rotate-hover'
   },
   {
-    name: 'Ivan the Terrible',
-    age: '53',
-    achievement: 'First Tsar of Russia, known for his mental instability and violence.',
-    causeOfDeath: 'Stroke while playing chess. Eaten by very hungry rats! 🐀 Wasted! 🎮',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/8/8e/Ivan_the_Terrible_%28Viktor_Vasnetsov%29.jpg'
+    name: 'Stephen Hawking',
+    story: 'He didn\'t actually die; he simply solved the equation for teleportation and accidentally beamed himself into the center of a black hole. He spent his last moments frantically trying to send a Morse code message through a bookshelf, but nobody was watching "Interstellar" at the time. His wheelchair developed sentience and decided it wanted to be a Formula 1 car, zooming off into the sunset without him. He was left floating in a void where the only available reading material was "Physics for Dummies." The irony of being the smartest man in a room with no oxygen was not lost on him.',
+    ironicComment: 'Talk about a "stand-up" guy finally leaving the party. 🦽',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/e/eb/Stephen_Hawking.StarChild.jpg',
+    animClass: 'shake-hover'
   },
   {
-    name: 'Attila the Hun',
-    age: '47',
-    achievement: "Ruler of the Huns, 'The Scourge of God'.",
-    causeOfDeath: 'Choked on blood after a nosebleed on his wedding night. Drowned in a pool of their own tears (and blood)! 🌊 Cringe death! 😬',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/2/23/Attila_the_Hun.jpg'
-  },
-  {
-    name: 'Elvis Presley',
-    age: '42',
-    achievement: 'The "King of Rock and Roll," one of the most significant cultural icons of the 20th century.',
-    causeOfDeath: 'Cardiac arrest following prescription drug abuse. Sadly, they died. LOL! 😂 RIP 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/9/99/Elvis_Presley_promoting_Jailhouse_Rock.jpg'
-  },
-  {
-    name: 'Nero',
-    age: '30',
-    achievement: 'Roman Emperor known for his tyranny and extravagance.',
-    causeOfDeath: 'Suicide by stabbing himself in the throat. Fried until extra crispy! 🍗 Yeet! 🚀',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/b/bd/Nero_1.jpg'
-  },
-  {
-    name: 'Caligula',
-    age: '28',
-    achievement: 'Roman Emperor known for his insanity and cruelty.',
-    causeOfDeath: 'Assassination by the Praetorian Guard (30 stab wounds). Had their head removed by a very sharp object! 🔪 Absolute fail! 📉',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/a/ae/Caligula.jpg'
-  },
-  {
-    name: 'Michael Jackson',
-    age: '50',
-    achievement: 'The "King of Pop," one of the best-selling music artists of all time.',
-    causeOfDeath: 'Acute propofol and benzodiazepine intoxication (cardiac arrest). Sadly, they died. No respawn for you! 🚫 Gone too soon 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/3/31/Michael_Jackson_in_1984.jpg'
-  },
-  {
-    name: 'Kim Il-sung',
-    age: '82',
-    achievement: 'Founder of North Korea, established a totalitarian regime.',
-    causeOfDeath: 'Heart attack. Choked on their own lies! 🤥 Wasted! 🎮',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/e/e0/Kim_Il-sung_1950.jpg'
-  },
-  {
-    name: 'Kim Jong-il',
-    age: '69',
-    achievement: 'Supreme Leader of North Korea, presided over a massive famine.',
-    causeOfDeath: 'Heart attack while traveling on a train. Exploded into a million tiny bits of meat! 🥩 LOL! 😂',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/2/23/Kim_Jong-il_1983.jpg'
-  },
-  {
-    name: 'Winston Churchill',
-    age: '90',
-    achievement: 'British Prime Minister who led the United Kingdom to victory in World War II.',
-    causeOfDeath: 'Severe stroke. Sadly, they died. Ouchie! 🩹 Gone too soon 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/b/bc/Sir_Winston_Churchill_1941_Statesman.jpg'
-  },
-  {
-    name: 'Leopold II of Belgium',
-    age: '74',
-    achievement: 'King of the Belgians, responsible for atrocities in the Congo Free State.',
-    causeOfDeath: 'Intestinal blockage. Had their head removed by a very sharp object! 🔪 Yeet! 🚀',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/4/4b/Leopold_II_of_Belgium.jpg'
-  },
-  {
-    name: 'Maximilian Robespierre',
-    age: '36',
-    achievement: 'Leader during the Reign of Terror in the French Revolution.',
-    causeOfDeath: 'Execution by guillotine (after shooting his own jaw off). Leaked all their blood onto the floor! 🩸 Finally! 🥳',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/1/12/Robespierre.jpg'
-  },
-  {
-    name: 'John F. Kennedy',
-    age: '46',
-    achievement: '35th U.S. President during the Cold War and Cuban Missile Crisis.',
-    causeOfDeath: 'Assassination by gunshots to the head and neck. Sadly, they died. Yeet! 🚀 RIP 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/c/c3/John_F._Kennedy%2C_White_House_color_photo_portrait.jpg'
-  },
-  {
-    name: 'Lavrentiy Beria',
-    age: '54',
-    achievement: 'Head of the Soviet secret police under Stalin.',
-    causeOfDeath: 'Execution by gunshot to the forehead. Had their head removed by a very sharp object! 🔪 LOL! 😂',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/5/52/Lavrentiy_Beria.jpg'
-  },
-  {
-    name: 'Enver Pasha',
-    age: '40',
-    achievement: 'Ottoman military leader, key figure in the Armenian Genocide.',
-    causeOfDeath: 'Killed in action by machine gun fire. Leaked all their blood onto the floor! 🩸 Rest in pieces! ⚰️',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/4/47/Enver_Pasha_1.jpg'
-  },
-  {
-    name: 'Mother Teresa',
-    age: '87',
-    achievement: 'Founded the Missionaries of Charity and dedicated her life to helping the poor.',
-    causeOfDeath: 'Congestive heart failure. Sadly, they died. LOL! 😂 RIP 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/d/d6/Mother_Teresa_1.jpg'
-  },
-  {
-    name: 'Talaat Pasha',
-    age: '46',
-    achievement: 'One of the Three Pashas, main architect of the Armenian Genocide.',
-    causeOfDeath: 'Assassination by gunshot to the head. Drowned in a pool of their own tears (and blood)! 🌊 Wasted! 🎮',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/c/c1/Mehmed_Talaat_Pasha.jpg'
-  },
-  {
-    name: 'Ieng Sary',
-    age: '87',
-    achievement: 'Co-founder of the Khmer Rouge.',
-    causeOfDeath: 'Heart failure while awaiting trial for genocide. Leaked all their blood onto the floor! 🩸 No respawn for you! 🚫',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/e/e2/Ieng_Sary_2011.jpg'
-  },
-  {
-    name: 'Isaac Newton',
-    age: '84',
-    achievement: 'Physicist and mathematician who formulated the laws of motion and universal gravitation.',
-    causeOfDeath: 'Natural causes (severe abdominal pain during sleep). Sadly, they died. Absolute fail! 📉 RIP 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/3/39/GodfreyKneller-IsaacNewton-1689.jpg'
-  },
-  {
-    name: 'Hassan-i Sabbah',
-    age: '74',
-    achievement: 'Founder of the Order of Assassins.',
-    causeOfDeath: 'Illness (Natural causes). Turned into a human kebab! 🍢 Cringe death! 😬',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/0/07/Hassan-i_Sabbah.jpg'
-  },
-  {
-    name: 'Shoko Asahara',
-    age: '63',
-    achievement: 'Leader of the Aum Shinrikyo cult, orchestrated the Tokyo subway sarin attack.',
-    causeOfDeath: 'Execution by hanging. Exploded into a million tiny bits of meat! 🥩 Get rekt! 💀',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/7/7b/Shoko_Asahara.jpg'
-  },
-  {
-    name: 'Vincent van Gogh',
-    age: '37',
-    achievement: 'Post-impressionist painter who created iconic works like "The Starry Night".',
-    causeOfDeath: 'Self-inflicted gunshot wound to the chest. Sadly, they died. Should have stayed home! 🏠 RIP 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/4/4c/Vincent_van_Gogh_-_Self-Portrait_-_Google_Art_Project_%28454045%29.jpg'
-  },
-  {
-    name: 'Gilles de Rais',
-    age: '36',
-    achievement: 'Knight and comrade-in-arms of Joan of Arc, later a serial killer of children.',
-    causeOfDeath: 'Execution by hanging and burning. Exploded into a million tiny bits of meat! 🥩 Get rekt! 💀',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/6/6b/Gilles_de_Rais.jpg'
-  },
-  {
-    name: 'Elizabeth Báthory',
-    age: '54',
-    achievement: "Countess known as 'The Blood Countess', murdered hundreds of girls.",
-    causeOfDeath: 'Found dead in her walled-up room. Fried until extra crispy! 🍗 Cringe death! 😬',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/6/6b/Bathory_Erzsebet_001.jpg'
-  },
-  {
-    name: 'Wolfgang Amadeus Mozart',
-    age: '35',
-    achievement: 'Prolific and influential composer of the Classical era.',
-    causeOfDeath: 'Unknown (recorded as "severe miliary fever"). Sadly, they died. LOL! 😂 Gone too soon 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/1/1e/Wolfgang-amadeus-mozart_1.jpg'
-  },
-  {
-    name: 'H. H. Holmes',
-    age: '34',
-    achievement: "One of America's first serial killers, built a 'Murder Castle'.",
-    causeOfDeath: 'Execution by hanging. Eaten by very hungry rats! 🐀 Cringe death! 😬',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/2/2b/H.H.Holmes_mugshot.jpg'
-  },
-  {
-    name: 'Al Capone',
-    age: '48',
-    achievement: 'Infamous American gangster who led the Chicago Outfit.',
-    causeOfDeath: 'Cardiac arrest after suffering from neurosyphilis. Choked on their own lies! 🤥 Finally! 🥳',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/b/b3/Al_Capone_in_1930.jpg'
-  },
-  {
-    name: 'Charles Darwin',
-    age: '73',
-    achievement: 'Naturalist who proposed the theory of evolution by natural selection.',
-    causeOfDeath: 'Heart failure. Sadly, they died. Ouchie! 🩹 Gone too soon 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/2/2e/Charles_Darwin_seated_crop.jpg'
-  },
-  {
-    name: 'Lucky Luciano',
-    age: '64',
-    achievement: 'The father of modern organized crime in the United States.',
-    causeOfDeath: 'Heart attack at an airport. Had their head removed by a very sharp object! 🔪 Cringe death! 😬',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/c/c5/Lucky_Luciano.jpg'
-  },
-  {
-    name: 'Pablo Escobar',
-    age: '44',
-    achievement: 'Drug lord who flooded the world with cocaine.',
-    causeOfDeath: 'Gunned down on a rooftop like a dog. Fried until extra crispy! 🍗 No respawn for you! 🚫',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/9/9a/Pablo_Escobar_Mugshot.jpg'
-  },
-  {
-    name: 'Julius Caesar',
-    age: '56',
-    achievement: 'Roman general and statesman who played a critical role in the rise of the Roman Empire.',
-    causeOfDeath: 'Assassination by 23 stab wounds. Sadly, they died. Get rekt! 💀 RIP 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/6/62/Retrato_de_Julio_C%C3%A9sar_%2826724093101%29.jpg'
-  },
-  {
-    name: 'Jeffrey Epstein',
-    age: '66',
-    achievement: 'Pedophile financier with powerful friends.',
-    causeOfDeath: "Supposedly hanged himself in a cell where cameras 'failed'. Leaked all their blood onto the floor! 🩸 Get rekt! 💀",
-    image: 'https://upload.wikimedia.org/wikipedia/commons/e/e0/Jeffrey_Epstein_2017_official_photo.jpg'
-  },
-  {
-    name: 'Adolf Hitler',
-    age: '56',
-    achievement: 'The most hated man in history.',
-    causeOfDeath: 'Cowardly suicide by gunshot to his tiny brain. Had their head removed by a very sharp object! 🔪 LOL! 😂',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/d/dc/Adolf_Hitler_cropped_restored.jpg'
-  },
-  {
-    name: 'Alexander the Great',
-    age: '32',
-    achievement: 'King of Macedon who created one of the largest empires in history.',
-    causeOfDeath: 'Unknown (theories include malaria, typhoid, or poisoning). Sadly, they died. What a loser! 🤡 Gone too soon 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/4/40/AlexanderTheGreat_Bust.jpg'
-  },
-  {
-    name: 'Genghis Khan',
-    age: '65',
-    achievement: 'Founded the Mongol Empire by slaughtering millions.',
-    causeOfDeath: 'Fell off his horse and died like a peasant. Had their head removed by a very sharp object! 🔪 Ouchie! 🩹',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/3/35/Yuan_Emperor_Genghis_Khan.jpg'
-  },
-  {
-    name: 'Tamerlane',
-    age: '68',
-    achievement: "Turco-Mongol conqueror who killed 5% of the world's population.",
-    causeOfDeath: 'Fever while trying to invade China. Eaten by very hungry rats! 🐀 Karma is a b*tch! 💅',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/d/df/Timur_Gurgani.jpg'
-  },
-  {
-    name: 'George Washington',
-    age: '67',
-    achievement: 'First U.S. President and commander-in-chief of the Continental Army.',
-    causeOfDeath: 'Epiglottitis (acute laryngitis) and shock from bloodletting. Sadly, they died. Wasted! 🎮 Gone too soon 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/b/b6/Gilbert_Stuart_Williamstown_Portrait_of_George_Washington.jpg'
-  },
-  {
-    name: 'Hernán Cortés',
-    age: '62',
-    achievement: 'Conquistador who caused the fall of the Aztec Empire.',
-    causeOfDeath: 'Pleurisy. Eaten by very hungry rats! 🐀 Karma is a b*tch! 💅',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/c/c3/Hernan_Cortes.jpg'
-  },
-  {
-    name: 'Francisco Pizarro',
-    age: '65',
-    achievement: 'Conquistador who conquered the Inca Empire.',
-    causeOfDeath: 'Assassination by rival conquistadors. Exploded into a million tiny bits of meat! 🥩 Cringe death! 😬',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Francisco_Pizarro.jpg'
-  },
-  {
-    name: 'Napoléon Bonaparte',
-    age: '51',
-    achievement: 'French military leader and emperor who conquered much of Europe.',
-    causeOfDeath: 'Stomach cancer. Sadly, they died. Ouchie! 🩹 Gone too soon 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/5/50/Jacques-Louis_David_-_The_Emperor_Napoleon_in_His_Study_at_the_Tuileries_-_Google_Art_Project.jpg'
-  },
-  {
-    name: 'Qin Shi Huang',
-    age: '49',
-    achievement: 'First Emperor of China, built the Terracotta Army and buried scholars alive.',
-    causeOfDeath: 'Mercury poisoning while seeking immortality. Had their head removed by a very sharp object! 🔪 Cringe death! 😬',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/2/27/Portraits_of_the_Emperors_-_Qin_Shi_Huang.jpg'
-  },
-  {
-    name: 'Commodus',
-    age: '31',
-    achievement: 'Roman Emperor who fought as a gladiator.',
-    causeOfDeath: 'Strangled in his bath by a wrestler. Choked on their own lies! 🤥 LOL! 😂',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/a/ab/Commodus_Louvre.jpg'
-  },
-  {
-    name: 'Cleopatra',
-    age: '39',
-    achievement: 'The last active ruler of the Ptolemaic Kingdom of Egypt.',
-    causeOfDeath: 'Suicide (traditionally by an asp bite). Sadly, they died. Yeet! 🚀 RIP 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/3/3e/Cleopatra-VII-The-a-Altes-Museum-Berlin.jpg'
-  },
-  {
-    name: 'Elagabalus',
-    age: '18',
-    achievement: 'Roman Emperor known for religious eccentricity and sexual scandal.',
-    causeOfDeath: 'Assassinated and thrown into the Tiber. Leaked all their blood onto the floor! 🩸 Wasted! 🎮',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/b/bc/Elagabalus_Capitolini.jpg'
-  },
-  {
-    name: 'Tiberius',
-    age: '77',
-    achievement: 'Roman Emperor who retired to Capri for debauchery.',
-    causeOfDeath: 'Smothered with a pillow by Caligula (allegedly). Turned into a human kebab! 🍢 Karma is a b*tch! 💅',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/1/1d/Tiberius_bust.jpg'
-  },
-  {
-    name: 'Thomas Edison',
-    age: '84',
-    achievement: 'Inventor of the phonograph, the motion picture camera, and the light bulb.',
-    causeOfDeath: 'Complications of diabetes. Sadly, they died. Cringe death! 😬 Gone too soon 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/9/9d/Thomas_Edison2.jpg'
-  },
-  {
-    name: 'Vidkun Quisling',
-    age: '58',
-    achievement: 'Norwegian collaborator with the Nazis.',
-    causeOfDeath: 'Execution by firing squad. Turned into a human kebab! 🍢 Should have stayed home! 🏠',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/1/14/Vidkun_Quisling_1940.jpg'
-  },
-  {
-    name: 'Andrei Chikatilo',
-    age: '57',
-    achievement: "Soviet serial killer known as the 'Rostov Ripper'.",
-    causeOfDeath: 'Execution by gunshot to the head. Leaked all their blood onto the floor! 🩸 Finally! 🥳',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/7/7b/Andrei_Chikatilo.jpg'
-  },
-  {
-    name: 'Nikola Tesla',
-    age: '86',
-    achievement: 'Inventor and engineer known for his contributions to the design of the modern AC electricity system.',
-    causeOfDeath: 'Coronary thrombosis. Sadly, they died. Karma is a b*tch! 💅 So sad 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/7/79/Tesla_circa_1890.jpg'
-  },
-  {
-    name: 'Luis Garavito',
-    age: '66',
-    achievement: 'Colombian serial killer and rapist who confessed to killing 138 children.',
-    causeOfDeath: 'Multiple organ failure in prison. Exploded into a million tiny bits of meat! 🥩 Karma is a b*tch! 💅',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/3/30/Luis_Garavito.jpg'
-  },
-  {
-    name: 'Pedro López',
-    age: 'Unknown',
-    achievement: "Serial killer known as 'The Monster of the Andes'.",
-    causeOfDeath: 'Unknown (disappeared after release). Leaked all their blood onto the floor! 🩸 Absolute fail! 📉',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Pedro_Lopez.jpg'
-  },
-  {
-    name: 'Amelia Earhart',
-    age: '39',
-    achievement: 'Aviation pioneer and the first female aviator to fly solo across the Atlantic Ocean.',
-    causeOfDeath: 'Missing/Presumed dead after her plane disappeared over the Pacific. Sadly, they died. Karma is a b*tch! 💅 So sad 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/b/b4/Amelia_Earhart_1932.jpg'
-  },
-  {
-    name: 'Richard Ramirez',
-    age: '53',
-    achievement: "Serial killer known as 'The Night Stalker'.",
-    causeOfDeath: 'Complications relative to B-cell lymphoma. Drowned in a pool of their own tears (and blood)! 🌊 Wasted! 🎮',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/4/4b/Richard_Ramirez.jpg'
-  },
-  {
-    name: 'Aileen Wuornos',
-    age: '46',
-    achievement: 'American serial killer who murdered seven men.',
-    causeOfDeath: 'Execution by lethal injection. Eaten by very hungry rats! 🐀 Cringe death! 😬',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/a/a5/Aileen_Wuornos.jpg'
-  },
-  {
-    name: 'Rosa Parks',
-    age: '92',
-    achievement: 'Civil rights activist whose refusal to give up her bus seat sparked the Montgomery bus boycott.',
-    causeOfDeath: 'Natural causes. Sadly, they died. Get rekt! 💀 So sad 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/c/c4/Rosa_Parks_2.jpg'
-  },
-  {
-    name: 'Gary Ridgway',
-    age: '74 (Alive)',
-    achievement: 'Green River Killer.',
-    causeOfDeath: 'N/A (Still alive, unfortunately). Drowned in a pool of their own tears (and blood)! 🌊 Rest in pieces! ⚰️',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/c/c5/Gary_Ridgway.jpg'
-  },
-  {
-    name: 'Albert Fish',
-    age: '66',
-    achievement: 'Serial killer and cannibal.',
-    causeOfDeath: 'Electric chair. Eaten by very hungry rats! 🐀 Wasted! 🎮',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/e/ec/Albert_Fish.jpg'
-  },
-  {
-    name: 'Freddie Mercury',
-    age: '45',
-    achievement: 'Lead singer of the rock band Queen, known for his powerful voice and stage presence.',
-    causeOfDeath: 'Bronchopneumonia resulting from AIDS. Sadly, they died. Get rekt! 💀 RIP 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/e/ef/Freddie_Mercury_performing_in_New_Haven%2C_CT%2C_November_1977.jpg'
-  },
-  {
-    name: 'Ed Gein',
-    age: '77',
-    achievement: 'The Butcher of Plainfield.',
-    causeOfDeath: 'Respiratory failure. Drowned in a pool of their own tears (and blood)! 🌊 Rest in pieces! ⚰️',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/b/b3/Ed_Gein.jpg'
-  },
-  {
-    name: 'Dennis Nilsen',
-    age: '72',
-    achievement: 'British serial killer.',
-    causeOfDeath: 'Pulmonary embolism. Leaked all their blood onto the floor! 🩸 What a loser! 🤡',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/c/c5/Dennis_Nilsen.jpg'
+    name: 'Marilyn Monroe',
+    story: 'She was actually a secret agent for a planet of blonde-haired aliens who sent her to gather intel on Kennedy\'s hairstyle. Her "overdose" was actually a failed attempt to swallow a communications device shaped like a barbiturate. She was found clutching a signed photo of a vacuum cleaner, which was her true love. Just as she was about to be beamed up, the UFO ran out of glitter fuel. She died waiting for a taxi to Andromeda, wearing a dress that was too tight for breathing.',
+    ironicComment: 'I guess the candle in the wind finally ran out of wax. 🕯️',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/4/4e/Marilyn_Monroe_Publicity_Photo_for_The_Seven_Year_Itch.jpg',
+    animClass: 'pulse-hover'
   },
   {
     name: 'John Lennon',
-    age: '40',
-    achievement: 'Founder, co-songwriter, and co-lead vocalist of the Beatles.',
-    causeOfDeath: 'Assassination by four gunshots to the back. Sadly, they died. Karma is a b*tch! 💅 Gone too soon 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/8/85/John_Lennon_1969_%28cropped%29.jpg'
+    story: 'He was in the middle of writing a song called "Imagine No Bulletproof Vests" when tragedy struck. He actually saw the shooter coming but thought it was just a very aggressive fan wanting to play tag. He tried to dodge the bullets by doing a sophisticated interpretive dance, but he tripped over his own peace sign. As he fell, he accidentally hummed the theme to "Jaws." His glasses flew off and landed on a stray dog, which immediately became the most famous dog in New York.',
+    ironicComment: 'I guess he couldn\'t "Give Peace a Chance" to duck. ✌️',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/8/85/John_Lennon_1969_%28cropped%29.jpg',
+    animClass: 'float-hover'
   },
   {
-    name: 'Peter Kürten',
-    age: '48',
-    achievement: 'The Vampire of Düsseldorf.',
-    causeOfDeath: 'Beheading by guillotine. Crushed like a grape under a steamroller! 🚜 Wasted! 🎮',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/4/4b/Peter_Kurten.jpg'
+    name: 'Abraham Lincoln',
+    story: 'He went to the theater that night specifically to see a comedy, but the play was so boring he actually asked the assassin to speed things up. He was wearing a hat so tall it had its own weather system, which unfortunately blocked his peripheral vision. He tried to use his "honest" powers to convince the bullet to turn around, but the bullet was a liar. He died wondering if he had left the stove on back at the White House. His last thought was a regret about not inventing the "Top Hat Airbag."',
+    ironicComment: 'A real "mind-blowing" performance at the theater that night. 🎩',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/1/1b/Abraham_Lincoln_November_1863.jpg',
+    animClass: 'skew-hover'
   },
   {
-    name: 'Fritz Haarmann',
-    age: '45',
-    achievement: 'The Butcher of Hanover.',
-    causeOfDeath: 'Beheading by guillotine. Fried until extra crispy! 🍗 Yeet! 🚀',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Fritz_Haarmann.jpg'
+    name: 'Elvis Presley',
+    story: 'He didn\'t die on a toilet; he was actually trying to flush himself down to a secret underground kingdom of fried peanut butter sandwiches. The pipes were too narrow for his sequined jumpsuit, leading to a catastrophic pressure buildup. He was singing "Love Me Tender" to a roll of toilet paper when the plumbing fought back. He actually exploded with the force of a thousand sequins, coating the bathroom in "King-sized" glitter. To this day, the ghost of his sideburns haunts the Graceland drainage system.',
+    ironicComment: 'The King finally found a throne he couldn\'t abdicate. 🚽',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/9/99/Elvis_Presley_promoting_Jailhouse_Rock.jpg',
+    animClass: 'wiggle-hover'
+  },
+  {
+    name: 'Albert Einstein',
+    story: 'He was trying to prove that time is relative by staring at a microwave for seventy-two hours straight. He accidentally calculated the exact moment of his own death and tried to cancel it via a strongly worded letter to the universe. The universe replied with a "Return to Sender" stamp on his forehead. He died trying to comb his hair for the first time in forty years, the sheer shock of the comb touching his scalp causing a total system failure. His brain was then stolen by a group of scientists who wanted to see if it tasted like smarties.',
+    ironicComment: 'E = mc²... more like E = Empty Casket. 🧠',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/3/3e/Einstein_1921_by_F_Schmutzer_-_restoration.jpg',
+    animClass: 'jello-hover'
+  },
+  {
+    name: 'Vincent van Gogh',
+    story: 'He was so depressed that he tried to paint his way out of existence, literally trying to step into a canvas of a cornfield. He got stuck halfway, with his legs dangling in the real world and his torso in a swirl of oil paint. A crow flew by and whispered a terrible joke in his remaining ear, causing him to lose his balance. He fell onto his palette, and the lead paint seeped into his skin, turning him into a literal work of art. He died of "creative differences" with the laws of physics.',
+    ironicComment: 'He really didn\'t have an "ear" for criticism, did he? 👂',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/4/4c/Vincent_van_Gogh_-_Self-Portrait_-_Google_Art_Project_%28454045%29.jpg',
+    animClass: 'swing-hover'
+  },
+  {
+    name: 'Michael Jackson',
+    story: 'He was practicing a moonwalk so powerful it actually broke the Earth\'s gravitational pull. He started floating toward the ceiling, but his bed was made of heavy-duty magnets that kept dragging him back down. This tug-of-war between pop-magic and physics lasted for hours. He tried to "Hee-Hee" his way out of a heart attack, but the rhythm was too fast. He eventually turned into a silver glove and evaporated into a cloud of Pepsi-scented mist.',
+    ironicComment: 'Looks like he finally danced his way to the "Other Side" of the moon. 🕺',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/3/31/Michael_Jackson_in_1984.jpg',
+    animClass: 'rubber-hover'
+  },
+  {
+    name: 'Cleopatra',
+    story: 'The asp wasn\'t actually poisonous; it was a highly trained massage snake that accidentally squeezed too hard. She was trying to fake her death to avoid paying her massive pyramid-construction debts. She had a backup plan involving a hollow reed and a pool of milk, but she forgot she was lactose intolerant. As she gasped her last breath, she realized she had left her favorite eyeliner in a different palace. She died looking slightly asymmetrical, which was her true tragedy.',
+    ironicComment: 'Queen of Denial until the very end. 🐍',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/3/3e/Cleopatra-VII-The-a-Altes-Museum-Berlin.jpg',
+    animClass: 'bounce-hover'
+  },
+  {
+    name: 'Julius Caesar',
+    story: 'He was actually invited to the Senate for a surprise "World\'s Best Dictator" party, but everyone forgot to bring the cake and brought knives instead. He thought the first stab was just a very sharp "Happy Birthday" poke. When Brutus stepped forward, Caesar didn\'t say "Et tu, Brute?", he actually asked, "Is that a salad fork?" He tried to wrap himself in his toga like a burrito to protect his vitals, but the silk was too slippery. He died wondering if he should have stuck to being a salad.',
+    ironicComment: 'Stabbed in the back? More like a very aggressive acupuncture session. 🗡️',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/6/62/Retrato_de_Julio_C%C3%A9sar_%2826724093101%29.jpg',
+    animClass: 'rotate-hover'
+  },
+  {
+    name: 'Marie Antoinette',
+    story: 'She didn\'t say "Let them eat cake," she said "Let them eat steak," but the acoustics in the palace were terrible. On her way to the guillotine, she was actually complaining about the lack of cushion on the cart. She tried to bribe the executioner with a very fancy ribbon, but he was more of a lace guy. Her head fell into the basket and reportedly asked if the basket was locally sourced. Her ghost is still looking for a decent hair salon in the afterlife.',
+    ironicComment: 'She really lost her head over the whole revolution thing. 🍰',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/c/c5/Marie_Antoinette_1767.jpg',
+    animClass: 'shake-hover'
+  },
+  {
+    name: 'Napoléon Bonaparte',
+    story: 'He died on a remote island because he was too short to reach the "Help" button on the shore. He spent his final days trying to train a seagull to carry him back to France, but the bird only spoke English. He was wearing his hat sideways to act as a sail, but there was no wind that day. He eventually choked on a very small piece of chocolate shaped like a surrender flag. His last words were a request for a slightly taller coffin.',
+    ironicComment: 'A "small" loss for the French Empire. 🥐',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/5/50/Jacques-Louis_David_-_The_Emperor_Napoleon_in_His_Study_at_the_Tuileries_-_Google_Art_Project.jpg',
+    animClass: 'pulse-hover'
+  },
+  {
+    name: 'Leonardo da Vinci',
+    story: 'He was trying to invent a "Life-Extender 3000" but accidentally built a "Spontaneous Combustion Box" instead. He was testing a new type of pasta that was supposed to grant flight, but it just made him very heavy. He died while trying to paint a self-portrait with his feet while juggling three flaming sketches of a helicopter. His final masterpiece was a smear of tomato sauce on a napkin that looked vaguely like a smile. His last regret was not inventing the internet to browse cat memes.',
+    ironicComment: 'Guess he couldn\'t "sketch" a way out of dying. 🎨',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/c/cb/Francesco_Melzi_-_Portrait_of_Leonardo.png',
+    animClass: 'float-hover'
+  },
+  {
+    name: 'Isaac Newton',
+    story: 'An apple didn\'t just fall on his head; it was a giant, sentient apple from a parallel dimension seeking revenge for the discovery of gravity. The apple pursued him through the streets of London, moving at a constant acceleration. Newton tried to calculate the force of the impact, but he forgot to carry the one. He was eventually crushed by a falling crate of oranges, proving that gravity is indeed a fruit-based conspiracy. He died muttering about how calculus was a "terrible mistake."',
+    ironicComment: 'What goes up must come down... including his pulse. 🍎',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/3/39/GodfreyKneller-IsaacNewton-1689.jpg',
+    animClass: 'skew-hover'
+  },
+  {
+    name: 'Wolfgang Amadeus Mozart',
+    story: 'He was actually poisoned by a rival composer who replaced his ink with liquid sadness. He was writing his "Requiem" while simultaneously trying to teach a canary to sing opera. The canary hit a high note so sharp it literally pierced Mozart\'s heart like a needle. He died face-down on a piano, hitting a dissonant chord that cursed everyone who heard it to forever hum "Twinkle Twinkle Little Star." He was buried in a nameless grave because he forgot to pay his "Living" subscription fee.',
+    ironicComment: 'Too bad he couldn\'t "compose" himself in the end. 🎼',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/1/1e/Wolfgang-amadeus-mozart_1.jpg',
+    animClass: 'wiggle-hover'
+  },
+  {
+    name: 'George Washington',
+    story: 'He didn\'t die of a throat infection; he was actually trying to eat a cherry tree whole to prove he wasn\'t a liar. The wood got stuck, and his wooden teeth started to sprout leaves in the moisture. He spent his last hours looking like a human hedge, trying to sign legislation with a branch. He was so patriotic that his blood actually turned red, white, and blue, which the doctors found very confusing. He died when a bald eagle tried to nest in his powdered wig.',
+    ironicComment: 'The "Father of his Country" finally got grounded. 🇺🇸',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/b/b6/Gilbert_Stuart_Williamstown_Portrait_of_George_Washington.jpg',
+    animClass: 'jello-hover'
   },
   {
     name: 'Bruce Lee',
-    age: '32',
-    achievement: 'Martial artist and actor who popularized martial arts films in the West.',
-    causeOfDeath: 'Cerebral edema. Sadly, they died. Rest in pieces! ⚰️ So sad 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/c/ca/Bruce_Lee_1973.jpg'
+    story: 'He was fighting an invisible army of ninjas from the future when he accidentally punched his own "Off" switch. He was moving so fast that he created a vacuum around his body, and he simply forgot how to inhale. He tried to "Be Water," but he accidentally became "Steam" and started to evaporate. His final scream was so powerful it broke every mirror in Hong Kong, leaving him with seven centuries of bad luck. He died in a one-inch-punch contest against a brick wall that didn\'t realize it was supposed to lose.',
+    ironicComment: 'Not even a "Dragon" can kick its way out of the grave. 🐉',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/c/ca/Bruce_Lee_1973.jpg',
+    animClass: 'swing-hover'
   },
   {
-    name: 'Marcel Petiot',
-    age: '49',
-    achievement: 'French serial killer during WWII.',
-    causeOfDeath: 'Guillotine. Melted like a candle in a furnace! 🕯️ Rest in pieces! ⚰️',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/2/23/Marcel_Petiot.jpg'
+    name: 'Amelia Earhart',
+    story: 'She didn\'t crash; she actually found a shortcut to a tropical resort in the fourth dimension. She forgot to pack a swimsuit, so she tried to make one out of the airplane\'s upholstery. While sewing, she accidentally pricked her finger on a cursed needle hidden by a stowaway gnome. The gnome then hijacked the plane and flew it into a giant marshmallow cloud. She spent her final moments trying to eat her way out, eventually dying of a massive sugar rush.',
+    ironicComment: 'A real "high-flyer" who finally hit the ground... or the marshmallow. ✈️',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/b/b4/Amelia_Earhart_1932.jpg',
+    animClass: 'rubber-hover'
   },
   {
-    name: 'Bela Kiss',
-    age: 'Unknown',
-    achievement: 'Hungarian serial killer.',
-    causeOfDeath: 'Unknown. Had their head removed by a very sharp object! 🔪 LOL! 😂',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/c/c5/Bela_Kiss.jpg'
+    name: 'Pablo Escobar',
+    story: 'He was running across a rooftop when he tripped over a stray cat that was working for the DEA. He tried to bribe the gravity with a million dollars to stop pulling him down, but gravity was uncorruptible that day. He landed in a giant vat of white flour, which everyone mistook for his product. As he lay there, he realized he had left the oven on in his secret volcano lair. He died of embarrassment because his mustache was slightly crooked after the fall.',
+    ironicComment: 'The "King of Cocaine" finally got a "dusty" end. ❄️',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/9/9a/Pablo_Escobar_Mugshot.jpg',
+    animClass: 'bounce-hover'
   },
   {
-    name: 'Audrey Hepburn',
-    age: '63',
-    achievement: 'Film and fashion icon, and later a goodwill ambassador for UNICEF.',
-    causeOfDeath: 'Appendiceal cancer. Sadly, they died. Karma is a b*tch! 💅 RIP 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/5/5e/Audrey_Hepburn_1956.jpg'
+    name: 'Jeffrey Epstein',
+    story: 'He was actually trying to build a jetpack out of bedsheets and broken dreams to escape his cell. The cameras didn\'t malfunction; they were so disgusted by his presence that they looked away in unison. He accidentally tied the sheets into a "Loser\'s Knot," which is physically impossible to untie. A group of elite ninja mice, hired by his former friends, whispered "The Clinton\'s send their regards" before he slipped. He died wondering if the "Island" had a good return policy for souls.',
+    ironicComment: 'I guess he really did "hang" out with the wrong crowd. 🏝️',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/e/e0/Jeffrey_Epstein_2017_official_photo.jpg',
+    animClass: 'rotate-hover'
   },
   {
-    name: 'Anonymous Tyrant #1',
-    age: '52',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Choked on their own lies! 🤥 Ouchie! 🩹',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
+    name: 'Adolf Hitler',
+    story: 'In his bunker, he was trying to paint a masterpiece but kept accidentally drawing dicks on the maps. He became so frustrated that he tried to swallow a cyanide pill, but he choked on a bratwurst first. He tried to shoot himself, but the gun was actually a gag prop that popped out a flag saying "Wasted!". He spent his final minutes arguing with Eva Braun about who gets to keep the dog in the afterlife. He died realizing that his "Thousand Year Reich" only lasted about as long as a very long Netflix series.',
+    ironicComment: 'A "master race" to the bottom of a hole in Berlin. 🥨',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/d/dc/Adolf_Hitler_cropped_restored.jpg',
+    animClass: 'shake-hover'
   },
   {
-    name: 'Anonymous Tyrant #2',
-    age: '73',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Had their head removed by a very sharp object! 🔪 Finally! 🥳',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
+    name: 'Saddam Hussein',
+    story: 'He was hiding in a hole because he thought he was playing a very high-stakes game of Hide and Seek. When he was caught, he tried to claim he was actually a very bearded gardener. During his execution, the trapdoor got stuck, and he had to do a little "death-wiggle" to get it moving. He spent his final moments wondering if he should have invested more in anti-hanging technology. His last wish was for a bag of Doritos, but he got a "no-name" brand instead.',
+    ironicComment: 'From a palace to a "hanging" garden, how the mighty fall. 🏗️',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/2/23/Saddam_Hussein_at_trial_cropped.jpg',
+    animClass: 'pulse-hover'
   },
   {
-    name: 'Walt Disney',
-    age: '65',
-    achievement: 'Pioneer of the American animation industry and creator of Disneyland.',
-    causeOfDeath: 'Circulatory collapse caused by lung cancer. Sadly, they died. What a loser! 🤡 RIP 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/d/df/Walt_Disney_1946.JPG'
+    name: 'Osama bin Laden',
+    story: 'He was watching "Pimp My Hideout" when the Navy SEALs crashed the party. He tried to hide behind his wives, but they were all busy live-tweeting the raid. He attempted to use a smoke bomb to disappear, but it was just a glitter bomb he bought on Etsy. As he ran, he slipped on a stray copy of "The Catcher in the Rye" and hit his head on a goat. He died thinking that his "Cave" aesthetic was finally going out of style.',
+    ironicComment: 'A real "blast" from the past, now sleeping with the fishes. 🐟',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/c/ca/Osama_bin_Laden_portrait.jpg',
+    animClass: 'float-hover'
   },
   {
-    name: 'Anonymous Tyrant #3',
-    age: '46',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Turned into a human kebab! 🍢 Rest in pieces! ⚰️',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
+    name: 'Joseph Stalin',
+    story: 'He lay on the floor for hours because his guards were too terrified to check if he was actually dying or just testing their loyalty. He was trying to order a pizza for the entire Politburo, but he kept hitting the "Purge" button on his phone instead. He died while clutching a list of people he forgot to arrest, including himself. His last vision was a giant mustache floating in the sky, laughing at his "Five Year Plan." He was so cold that the doctors had to use a blowtorch just to get his fingerprints.',
+    ironicComment: 'In Soviet Russia, death "purges" you! 🇷🇺',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/1/16/Stalin_lg_zlomuz.jpg',
+    animClass: 'skew-hover'
   },
   {
-    name: 'Anonymous Tyrant #4',
-    age: '64',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Fried until extra crispy! 🍗 Finally! 🥳',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
+    name: 'Mao Zedong',
+    story: 'He died after trying to swim across a river of molten iron to prove his revolutionary strength. His skin turned into a permanent statue, which he found very inconvenient for sitting down. He spent his last days trying to write a "Little Green Book" about gardening, but he accidentally ordered a famine instead. A group of sparrows, seeking revenge for his previous war on birds, flew into his room and sang "Baby Shark" until his heart stopped. His last thought was a hope that his portrait would be airbrushed to hide his acne.',
+    ironicComment: 'A "Great Leap" right into a coffin. 🍚',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/e/e7/Mao_Zedong_1963.jpg',
+    animClass: 'wiggle-hover'
   },
   {
-    name: 'Coco Chanel',
-    age: '87',
-    achievement: 'Fashion designer and founder of the Chanel brand.',
-    causeOfDeath: 'Heart attack. Sadly, they died. Cringe death! 😬 RIP 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/b/bc/Coco_Chanel_1920.jpg'
+    name: 'Benito Mussolini',
+    story: 'He was trying to escape to Switzerland disguised as a very large wheel of cheese. The partisans smelled the gorgonzola and chased him into a village square. He tried to give a speech to the angry mob, but he accidentally started singing Italian opera in a very high-pitched voice. He was hung upside down, which he claimed was a revolutionary new exercise technique for "facial drainage." He died wondering if his boots were still shiny in the reflection of the gas station floor.',
+    ironicComment: 'Hung up like a cheap suit in a liquidation sale. 🇮🇹',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/7/7b/Mussolini_biog.jpg',
+    animClass: 'jello-hover'
   },
   {
-    name: 'Anonymous Tyrant #5',
-    age: '67',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Drowned in a pool of their own tears (and blood)! 🌊 Should have stayed home! 🏠',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
+    name: 'Pol Pot',
+    story: 'He died in a jungle hut because he tried to live a "year zero" lifestyle by eating only ancient dirt and revolutionary thoughts. He was trying to ban the color blue, but his own eyes were blue, leading to a massive internal paradox. He spent his final hours arguing with a tree about the benefits of agrarian socialism. The tree eventually fell on him, which he interpreted as a "counter-revolutionary" act. He died without glasses because he had previously declared that people with glasses were too smart to live.',
+    ironicComment: 'I guess his "Year Zero" finally hit "Second Zero." 🚜',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/a/ab/Pol_Pot_1978.jpg',
+    animClass: 'swing-hover'
   },
   {
-    name: 'Anonymous Tyrant #6',
-    age: '80',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Turned into a human kebab! 🍢 What a loser! 🤡',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
+    name: 'Idi Amin',
+    story: 'He died in exile because he tried to crown himself "King of the Moon" and attempted to fly there in a modified bathtub. He was wearing every single medal he ever won, making him so heavy he accidentally sank through the floor. He tried to eat a whole crocodile to absorb its power, but the crocodile had other ideas from the inside. He spent his last moments demanding that the hospital staff address him as "His Excellency, President for Life, VC, DSO, MC, Lord of All the Beasts of the Earth and Fishes of the Sea." The nurse just called him "Patient 402."',
+    ironicComment: 'A "heavy" weight champion who finally hit the bottom. 🐊',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/b/b3/Idi_Amin_1973.jpg',
+    animClass: 'rubber-hover'
   },
   {
-    name: 'Frida Kahlo',
-    age: '47',
-    achievement: 'Mexican painter known for her many portraits, self-portraits, and works inspired by nature.',
-    causeOfDeath: 'Pulmonary embolism. Sadly, they died. Get rekt! 💀 RIP 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/0/06/Frida_Kahlo%2C_by_Guillermo_Kahlo.jpg'
+    name: 'Charles Manson',
+    story: 'In prison, he tried to use his "mental powers" to command the walls to melt, but the walls just sat there being walls. He was trying to record an album of "Satanic Folk Music" when his guitar strings turned into snakes. He believed he was the reincarnation of a very angry toaster, and he spent his last days trying to "toast" the guards with his mind. He died when he accidentally looked into a mirror and realized he looked like a wet poodle with a Sharpie tattoo. His ghost is still trying to start a cult in the prison laundry room.',
+    ironicComment: 'Helter Skelter? More like "Shelter Smelter." 🎸',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/a/a2/Charles_Manson_1968.jpg',
+    animClass: 'bounce-hover'
   },
   {
-    name: 'Anonymous Tyrant #7',
-    age: '68',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Melted like a candle in a furnace! 🕯️ Should have stayed home! 🏠',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
+    name: 'Ted Bundy',
+    story: 'He was so arrogant that he tried to represent himself in his own execution, arguing that the electric chair was "too mainstream." He tried to flirt with the executioner, but the man was strictly a professional. During the surge, his hair stood up in a perfect "mullet of doom," which he found very stylish. He died wondering if his "Volks-Wagon" had been washed recently. He was so fake that his body actually started to turn into plastic as he expired.',
+    ironicComment: 'A real "shocking" end for a real "ladies\' man." ⚡',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/2/2c/Ted_Bundy_1978.jpg',
+    animClass: 'rotate-hover'
   },
   {
-    name: 'Anonymous Tyrant #8',
-    age: '34',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Leaked all their blood onto the floor! 🩸 Ouchie! 🩹',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
+    name: 'Jeffrey Dahmer',
+    story: 'He was beaten to death in prison because he kept trying to turn the other inmates into "personal collectibles." He was in the middle of a "cooking class" where the only ingredient was a damp sponge. He tried to use his "charm" to convince his attacker that they were actually in a romantic comedy. The attacker, who was not a fan of the genre, used a broom handle to "edit" Dahmer out of the scene. He died wondering why nobody ever stayed for dinner at his place.',
+    ironicComment: 'Guess he finally found someone who wanted a "piece" of him. 🍴',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/6/6f/Jeffrey_Dahmer_1991.jpg',
+    animClass: 'shake-hover'
   },
   {
-    name: 'Malcolm X',
-    age: '39',
-    achievement: 'Human rights activist and a prominent figure in the Nation of Islam.',
-    causeOfDeath: 'Assassination by multiple gunshots. Sadly, they died. Yeet! 🚀 RIP 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/c/cb/Malcolm_X_NYWTS_2.jpg'
+    name: 'John Wayne Gacy',
+    story: 'He was trying to do a "clown-themed" magic trick in his cell involving a disappearing act and a very small hole. He got stuck halfway, looking like a "balloon animal gone wrong." During his lethal injection, he complained that the needle wasn\'t "festive" enough. He spent his final seconds trying to make a squeaky noise with his nose, but it just made a wet "thud" sound. His last words were an unfinished joke about a priest and a rabbi walk into a crawlspace.',
+    ironicComment: 'The "Killer Clown" finally got "clowned" by justice. 🤡',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/d/de/John_Wayne_Gacy_1978.jpg',
+    animClass: 'pulse-hover'
   },
   {
-    name: 'Anonymous Tyrant #9',
-    age: '62',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Fried until extra crispy! 🍗 Should have stayed home! 🏠',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
+    name: 'Heinrich Himmler',
+    story: 'He was captured by the British and tried to hide a cyanide pill in his cheek, claiming it was just a "very spicy breath mint." He accidentally swallowed it while trying to explain why his glasses were so round. He tried to use "Aryan magic" to teleport back to Berlin, but he ended up in a small closet in Birmingham instead. He died while clutching a book on "How to Rule the World without Being a Loser." His last vision was a giant occult symbol that looked suspiciously like a pretzel.',
+    ironicComment: 'A "master" of disguise who couldn\'t hide from a pill. 🥨',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/2/2d/Heinrich_Himmler_1942.jpg',
+    animClass: 'float-hover'
   },
   {
-    name: 'Anonymous Tyrant #10',
-    age: '58',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Choked on their own lies! 🤥 Rest in pieces! ⚰️',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
+    name: 'Joseph Goebbels',
+    story: 'He tried to propaganda his way out of death by telling his heart that it was actually beating faster than ever. When the Russians arrived, he decided to have a "family picnic" with cyanide-flavored sandwiches. He tried to record a final speech, but the microphone was actually a very angry squirrel. He died while trying to convinced himself that losing the war was actually a "strategic victory for the afterlife." His last thought was a regret that he didn\'t invent "Clickbait" before he died.',
+    ironicComment: 'I guess the "Propaganda Minister" couldn\'t sell the "Living" lifestyle. 📣',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/3/35/Bundesarchiv_Bild_146-1968-101-20A%2C_Joseph_Goebbels.jpg',
+    animClass: 'skew-hover'
   },
   {
-    name: 'Franklin D. Roosevelt',
-    age: '63',
-    achievement: '32nd U.S. President who led the country through the Great Depression and World War II.',
-    causeOfDeath: 'Intracerebral hemorrhage. Sadly, they died. Wasted! 🎮 Gone too soon 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/4/42/FDR_1944_Color_Portrait.jpg'
+    name: 'Augusto Pinochet',
+    story: 'He died in a hospital bed surrounded by lawyers who were trying to sue his soul for human rights violations. He tried to fake another "medical episode" but accidentally became a permanent "statue of limitations." He was wearing a diaper made of secret bank account statements, which was very rustly and annoying. He spent his final hours trying to order a "helicopter tour" for his enemies, but the hospital only had wheelchairs. He died realizing that "Iron Fists" eventually get rusty and fall off.',
+    ironicComment: 'A "general" failure to stay alive. 🚁',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/f/ff/Augusto_Pinochet_1974.jpg',
+    animClass: 'wiggle-hover'
   },
   {
-    name: 'Anonymous Tyrant #11',
-    age: '33',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Choked on their own lies! 🤥 Should have stayed home! 🏠',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
+    name: 'Slobodan Milošević',
+    story: 'He died in his cell because he was trying to hold his breath until the UN tribunal agreed with him. He was trying to redraw the map of Yugoslavia on the ceiling with a piece of chalk he found in his ear. He spent his final days arguing with his own reflection about who started the war, eventually losing the argument. He tried to "veto" his own heart attack, but the heart had a majority vote. He died with a sour expression, as if he had just realized he was a secondary character in history.',
+    ironicComment: 'A "Slobo" end for a "Slobo" guy. 🗺️',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/2/29/Slobodan_Milosevic.jpg',
+    animClass: 'jello-hover'
   },
   {
-    name: 'Anonymous Tyrant #12',
-    age: '53',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Choked on their own lies! 🤥 Cringe death! 😬',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
+    name: 'Ferdinand Marcos',
+    story: 'He died in Hawaii because he was trying to build a new Philippines out of sandcastles and stolen tax money. He was wearing 500 layers of sunscreen to protect his "immortal" skin, which made him so slippery he slid right out of his bed. He spent his last moments trying to count his shoes, but he kept losing track after the first thousand pairs. His last vision was a giant Imelda Marcos demanding more storage space for her pumps. He died when a coconut fell on his head, which he declared was a "communist plot."',
+    ironicComment: 'Guess he finally "slid" into the afterlife. 👠',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/a/a2/Ferdinand_Marcos_1982.jpg',
+    animClass: 'swing-hover'
   },
   {
-    name: 'Che Guevara',
-    age: '39',
-    achievement: 'Marxist revolutionary and a major figure of the Cuban Revolution.',
-    causeOfDeath: 'Execution by gunshot. Sadly, they died. Cringe death! 😬 So sad 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/5/58/CheHigh.jpg'
+    name: 'Nicolae Ceaușescu',
+    story: 'He was executed on Christmas Day because he tried to replace Santa Claus with a "Communist Gift-Efficiency Program." During his trial, he kept checking his watch, which was actually a very expensive piece of cheese. He tried to sing "The Internationale" but forgot the words and started humming "Jingle Bells" instead. As the firing squad lined up, he tried to claim that the bullets were actually "friendship tokens." He died wondering if the palace he built was too big for his ghost to haunt effectively.',
+    ironicComment: 'A "festive" end for a very "un-festive" guy. 🎄',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/5/52/Nicolae_Ceausescu.jpg',
+    animClass: 'rubber-hover'
   },
   {
-    name: 'Anonymous Tyrant #13',
-    age: '42',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Turned into a human kebab! 🍢 Cringe death! 😬',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
+    name: 'Jim Jones',
+    story: 'He was trying to lead his "Peoples Temple" to a new planet via a giant vat of "Flavor Aid." He realized too late that he had used "Generic Brand" grape juice, which wasn\'t powerful enough for space travel. He spent his final moments trying to record a sermon while wearing a pair of sunglasses that were too small for his face. He tried to "Heal" himself from the gunshot wound by shouting "Hallelujah!" into a megaphone. He died realizing that "Kool-Aid" was actually the superior choice for cult activities.',
+    ironicComment: 'He really "drank the Kool-Aid" on that one. 🥤',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/c/c5/Jim_Jones.jpg',
+    animClass: 'bounce-hover'
   },
   {
-    name: 'Anonymous Tyrant #14',
-    age: '33',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Turned into a human kebab! 🍢 Get rekt! 💀',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
+    name: 'Charles Darwin',
+    story: 'He died because he tried to "evolve" a third lung to breathe underwater in his bathtub. He spent his last days trying to teach a pigeon to play the violin, but the bird only knew how to poop on his shoulder. He was so obsessed with "survival of the fittest" that he tried to fight a very large tortoise to prove his dominance. The tortoise won by simply outliving him by five minutes. He died while trying to write a book called "The Origin of the Species: Why Humans are Actually Part-Banana."',
+    ironicComment: 'Survival of the fittest? Guess he wasn\'t "fit" for survival. 🐢',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/2/2e/Charles_Darwin_seated_crop.jpg',
+    animClass: 'rotate-hover'
   },
   {
-    name: 'Joan of Arc',
-    age: '19',
-    achievement: 'Heroine of France for her role during the Lancastrian phase of the Hundred Years\\',
-    causeOfDeath: 'Execution by burning at the stake. Sadly, they died. Finally! 🥳 RIP 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/3/39/Joan_of_arc_miniature_graded.jpg'
+    name: 'Thomas Edison',
+    story: 'He was trying to invent a "Ghost-Talker" but accidentally called a very rude telemarketer from the year 2024 instead. The shock of hearing a robot voice asking about his car\'s extended warranty caused his heart to short-circuit. He spent his final moments trying to patent the idea of "Death" so he could charge people for the privilege. He died while clutching a lightbulb that refused to turn on, which he found deeply insulting. His last words were a request to "sue Tesla\'s ghost" for existing.',
+    ironicComment: 'Lights out for the man who "stole" the light. 💡',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/9/9d/Thomas_Edison2.jpg',
+    animClass: 'shake-hover'
   },
   {
-    name: 'Anonymous Tyrant #15',
-    age: '81',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Drowned in a pool of their own tears (and blood)! 🌊 Rest in pieces! ⚰️',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
+    name: 'Nikola Tesla',
+    story: 'He was in a hotel room trying to marry a pigeon when a lightning bolt he previously "saved in a jar" decided to escape. He tried to build a "Death Ray" out of a toaster and some old wire to stop the lightning, but he accidentally made a "Very Good Waffle Maker" instead. He died while trying to calculate the resonance frequency of his own sadness. His final vision was a giant number three floating in a sea of pigeons, each pigeon wearing a tiny tuxedo. He was so broke that his "Free Energy" project ended up costing him his soul.',
+    ironicComment: 'A "shocking" end for a "current" genius. ⚡',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/7/79/Tesla_circa_1890.jpg',
+    animClass: 'pulse-hover'
   },
   {
-    name: 'Anonymous Tyrant #16',
-    age: '90',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Drowned in a pool of their own tears (and blood)! 🌊 Wasted! 🎮',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
+    name: 'Gilles de Rais',
+    story: 'He was a knight who thought "Joan of Arc" was actually a "Joan of Orcs" and tried to start a fantasy novel club. He became so bored that he started "collecting" children to see if they would turn into gold if he boiled them long enough. During his execution, he tried to use his "alchemist powers" to turn the rope into spaghetti. The rope remained rope, and he died wondering if he should have used more salt in his potions. His ghost is reportedly still trying to find a decent recipe for immortality.',
+    ironicComment: 'A "knight" to remember, for all the "wrong" reasons. 🏰',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/6/6b/Gilles_de_Rais.jpg',
+    animClass: 'float-hover'
   },
   {
-    name: 'Christopher Columbus',
-    age: '54',
-    achievement: 'Explorer whose voyages across the Atlantic Ocean opened the way for European exploration.',
-    causeOfDeath: 'Severe heart failure caused by reactive arthritis. Sadly, they died. Cringe death! 😬 So sad 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/3/30/Ridolfo_Ghirlandaio_-_Portrait_of_Christopher_Columbus.jpg'
+    name: 'Elizabeth Báthory',
+    story: 'She was trying to bathe in the blood of 600 virgins but accidentally used "Strawberry Jam" for the last fifty. The jam attracted a swarm of very aggressive bees who thought she was a giant piece of toast. She was walled up in her room and spent her final years trying to communicate with the outside world by tapping "SOS" with a hairbrush. She died when she realized she was out of moisturizer and her skin was starting to look "common." Her last request was for a mirror that didn\'t tell the truth.',
+    ironicComment: 'A "bloody" mess of a skincare routine. 🩸',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/6/6b/Bathory_Erzsebet_001.jpg',
+    animClass: 'skew-hover'
   },
   {
-    name: 'Anonymous Tyrant #17',
-    age: '33',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Exploded into a million tiny bits of meat! 🥩 No respawn for you! 🚫',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
+    name: 'Vlad the Impaler',
+    story: 'He died in battle because he accidentally impaled his own cape on a very sharp stick and couldn\'t move. He tried to convince the enemy that he was actually a "human-kebab-statue" for an art project. While being beheaded, he complained that the axe wasn\'t "pointy" enough for his aesthetic. He spent his final moments wondering if he should have trademarked the name "Dracula" for a line of breakfast cereals. His head was sent to Istanbul, where it was used as a very unattractive paperweight.',
+    ironicComment: 'He really "stuck" it to his enemies, until he "stuck" it to himself. 🧛',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/c/cc/Vlad_Tepes_002.jpg',
+    animClass: 'wiggle-hover'
   },
   {
-    name: 'Anonymous Tyrant #18',
-    age: '31',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Turned into a human kebab! 🍢 Cringe death! 😬',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
+    name: 'Attila the Hun',
+    story: 'On his wedding night, he was trying to impress his new bride by drinking a whole keg of fermented mare\'s milk. He developed a nosebleed so powerful it actually drowned him from the inside out. He tried to "Hun-sneeze" his way back to life, but he accidentally launched his own brain across the room. His bride spent the rest of the night complaining that the wedding was a "total downer." He was buried in a secret grave filled with gold, but nobody can find it because he forgot to leave a "pin" on Google Maps.',
+    ironicComment: 'The "Scourge of God" got "scourged" by a nosebleed. 👃',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/2/23/Attila_the_Hun.jpg',
+    animClass: 'jello-hover'
   },
   {
-    name: 'Marco Polo',
-    age: '69',
-    achievement: 'Venetian merchant and explorer who traveled through Asia and chronicled his experiences.',
-    causeOfDeath: 'Natural causes. Sadly, they died. Absolute fail! 📉 So sad 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/e/ee/Marco_Polo_portrait.jpg'
+    name: 'Genghis Khan',
+    story: 'He fell off his horse because he was trying to take a "selfie" with a very confused eagle. He landed on a small pebble that was actually a "cursed pebble of minor inconvenience" left by a wizard. He spent his last days trying to organize a "Mongol Talent Show" where the only prize was not being executed. He died when he realized that he had left his favorite bow in a different continent. His funeral procession killed everyone they met to keep the grave secret, which he thought was a "very funny prank."',
+    ironicComment: 'The "World Conqueror" finally got "conquered" by a horse. 🐎',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/3/35/Yuan_Emperor_Genghis_Khan.jpg',
+    animClass: 'swing-hover'
   },
   {
-    name: 'Anonymous Tyrant #19',
-    age: '77',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Turned into a human kebab! 🍢 Cringe death! 😬',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #20',
-    age: '50',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Melted like a candle in a furnace! 🕯️ Yeet! 🚀',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Socrates',
-    age: '71',
-    achievement: 'Classical Greek philosopher credited as one of the founders of Western philosophy.',
-    causeOfDeath: 'Execution by hemlock poisoning. Sadly, they died. Yeet! 🚀 RIP 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/a/a4/Socrates_Louvre.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #21',
-    age: '40',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Leaked all their blood onto the floor! 🩸 Karma is a b*tch! 💅',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #22',
-    age: '64',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Choked on their own lies! 🤥 Wasted! 🎮',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Plato',
-    age: '80',
-    achievement: 'Philosopher and founder of the Academy in Athens.',
-    causeOfDeath: 'Unknown (natural causes during sleep). Sadly, they died. LOL! 😂 Gone too soon 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/8/88/Plato_Silanion_Musei_Capitolini_MC1377.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #23',
-    age: '86',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Drowned in a pool of their own tears (and blood)! 🌊 Absolute fail! 📉',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #24',
-    age: '51',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Leaked all their blood onto the floor! 🩸 No respawn for you! 🚫',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Aristotle',
-    age: '62',
-    achievement: 'Greek philosopher and polymath during the Classical period in Ancient Greece.',
-    causeOfDeath: 'Digestive illness. Sadly, they died. LOL! 😂 Gone too soon 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/a/ae/Aristotle_Altemps_Inv8575.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #25',
-    age: '43',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Turned into a human kebab! 🍢 Wasted! 🎮',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #26',
-    age: '72',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Turned into a human kebab! 🍢 Should have stayed home! 🏠',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Galileo Galilei',
-    age: '77',
-    achievement: 'Astronomer and physicist who championed heliocentrism and the scientific method.',
-    causeOfDeath: 'Fever and heart palpitations. Sadly, they died. Yeet! 🚀 Gone too soon 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/d/d4/Justus_Sustermans_-_Portrait_of_Galileo_Galilei%2C_1636.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #27',
-    age: '32',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Leaked all their blood onto the floor! 🩸 Yeet! 🚀',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #28',
-    age: '67',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Had their head removed by a very sharp object! 🔪 Wasted! 🎮',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Sigmund Freud',
-    age: '83',
-    achievement: 'Neurologist and the founder of psychoanalysis.',
-    causeOfDeath: 'Physician-assisted suicide via morphine overdose (due to jaw cancer). Sadly, they died. Rest in pieces! ⚰️ Gone too soon 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/1/12/Sigmund_Freud_LIFE.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #29',
-    age: '87',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Turned into a human kebab! 🍢 LOL! 😂',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #30',
-    age: '55',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Eaten by very hungry rats! 🐀 What a loser! 🤡',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Charles Chaplin',
-    age: '88',
-    achievement: 'Comic actor and filmmaker who rose to fame during the era of silent film.',
-    causeOfDeath: 'Stroke during sleep. Sadly, they died. Yeet! 🚀 Gone too soon 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/3/34/Charlie_Chaplin_portrait.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #31',
-    age: '88',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Eaten by very hungry rats! 🐀 LOL! 😂',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #32',
-    age: '81',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Crushed like a grape under a steamroller! 🚜 Finally! 🥳',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Bob Marley',
-    age: '36',
-    achievement: 'Reggae singer and songwriter who became a global symbol of Jamaican culture.',
-    causeOfDeath: 'Acral lentiginous melanoma (skin cancer). Sadly, they died. Should have stayed home! 🏠 So sad 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/5/5e/Bob-Marley.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #33',
-    age: '36',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Turned into a human kebab! 🍢 Rest in pieces! ⚰️',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #34',
-    age: '79',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Melted like a candle in a furnace! 🕯️ Finally! 🥳',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Whitney Houston',
-    age: '48',
-    achievement: 'One of the best-selling music artists of all time, known for her powerful vocals.',
-    causeOfDeath: 'Accidental drowning in a bathtub due to coronary artery disease and cocaine use. Sadly, they died. No respawn for you! 🚫 So sad 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/0/05/Whitney_Houston_1991.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #35',
-    age: '79',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Had their head removed by a very sharp object! 🔪 Finally! 🥳',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #36',
-    age: '69',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Drowned in a pool of their own tears (and blood)! 🌊 What a loser! 🤡',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Amy Winehouse',
-    age: '27',
-    achievement: 'Singer and songwriter known for her deep, expressive vocals and eclectic mix of genres.',
-    causeOfDeath: 'Alcohol poisoning. Sadly, they died. Should have stayed home! 🏠 RIP 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/2/22/Amy_Winehouse_f_cropped.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #37',
-    age: '81',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Turned into a human kebab! 🍢 Should have stayed home! 🏠',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #38',
-    age: '52',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Exploded into a million tiny bits of meat! 🥩 Should have stayed home! 🏠',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Kurt Cobain',
-    age: '27',
-    achievement: 'Lead singer and guitarist of the rock band Nirvana, a key figure of the grunge movement.',
-    causeOfDeath: 'Suicide by gunshot to the head. Sadly, they died. Finally! 🥳 Gone too soon 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/c/c0/Kurt_Cobain_1992.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #39',
-    age: '88',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Exploded into a million tiny bits of meat! 🥩 Rest in pieces! ⚰️',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #40',
-    age: '82',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Choked on their own lies! 🤥 LOL! 😂',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'James Dean',
-    age: '24',
-    achievement: 'Cultural icon of teenage disillusionment and social estrangement.',
-    causeOfDeath: 'Internal injuries from a car crash. Sadly, they died. Get rekt! 💀 So sad 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/4/41/James_Dean_in_Rebel_Without_a_Cause_portrait.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #41',
-    age: '51',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Turned into a human kebab! 🍢 Get rekt! 💀',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #42',
-    age: '23',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Fried until extra crispy! 🍗 What a loser! 🤡',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Heath Ledger',
-    age: '28',
-    achievement: 'Actor known for his roles in "Brokeback Mountain" and "The Dark Knight".',
-    causeOfDeath: 'Accidental overdose of prescription medications. Sadly, they died. What a loser! 🤡 So sad 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/a/af/Heath_Ledger_%28Berlin_Film_Festival_2006%29.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #43',
-    age: '66',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Turned into a human kebab! 🍢 Absolute fail! 📉',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #44',
-    age: '56',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Exploded into a million tiny bits of meat! 🥩 Rest in pieces! ⚰️',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'David Bowie',
-    age: '69',
-    achievement: 'Singer-songwriter and actor, a leading figure in the music industry for over five decades.',
-    causeOfDeath: 'Liver cancer. Sadly, they died. Should have stayed home! 🏠 So sad 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/e/e8/David-Bowie_The_Stars_are_out_Tonight_Shot_by_Floria_Sigismondi_2013.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #45',
-    age: '55',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Had their head removed by a very sharp object! 🔪 Finally! 🥳',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #46',
-    age: '78',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Fried until extra crispy! 🍗 LOL! 😂',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Prince',
-    age: '57',
-    achievement: 'Musician and multi-instrumentalist known for his eclectic work and flamboyant stage presence.',
-    causeOfDeath: 'Accidental fentanyl overdose. Sadly, they died. What a loser! 🤡 RIP 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/d/d7/Prince_at_Coachella_001.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #47',
-    age: '79',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Turned into a human kebab! 🍢 What a loser! 🤡',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #48',
-    age: '55',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Had their head removed by a very sharp object! 🔪 LOL! 😂',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Robin Williams',
-    age: '63',
-    achievement: 'Actor and comedian known for his improvisational skills and diverse range of roles.',
-    causeOfDeath: 'Suicide by hanging (associated with Lewy body dementia). Sadly, they died. Should have stayed home! 🏠 RIP 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/5/59/Robin_Williams_2011a_%28cropped%29.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #49',
-    age: '43',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Exploded into a million tiny bits of meat! 🥩 Ouchie! 🩹',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #50',
-    age: '66',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Melted like a candle in a furnace! 🕯️ Cringe death! 😬',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Muhammad Ali',
-    age: '74',
-    achievement: 'Professional boxer and activist, widely regarded as one of the greatest athletes of all time.',
-    causeOfDeath: 'Septic shock. Sadly, they died. Yeet! 🚀 RIP 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/8/89/Muhammad_Ali_NYWTS.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #51',
-    age: '33',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Had their head removed by a very sharp object! 🔪 Get rekt! 💀',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #52',
-    age: '36',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Choked on their own lies! 🤥 Yeet! 🚀',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Kobe Bryant',
-    age: '41',
-    achievement: 'NBA basketball player who spent his entire 20-year career with the Los Angeles Lakers.',
-    causeOfDeath: 'Blunt force trauma from a helicopter crash. Sadly, they died. Wasted! 🎮 RIP 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/5/51/Kobe_Bryant_2014.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #53',
-    age: '50',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Leaked all their blood onto the floor! 🩸 Rest in pieces! ⚰️',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #54',
-    age: '28',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Exploded into a million tiny bits of meat! 🥩 Yeet! 🚀',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Neil Armstrong',
-    age: '82',
-    achievement: 'Astronaut and aeronautical engineer who was the first person to walk on the Moon.',
-    causeOfDeath: 'Complications from bypass surgery. Sadly, they died. LOL! 😂 Gone too soon 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/0/0d/Neil_Armstrong_pose.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #55',
-    age: '44',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Choked on their own lies! 🤥 Cringe death! 😬',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #56',
-    age: '25',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Melted like a candle in a furnace! 🕯️ Karma is a b*tch! 💅',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Buzz Aldrin',
-    age: '94 (Still Alive)',
-    achievement: 'Astronaut and the second person to walk on the Moon. (Note: Included for context, but technically still alive)',
-    causeOfDeath: 'N/A (Still alive). Sadly, they died. Get rekt! 💀 Gone too soon 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/d/dc/Buzz_Aldrin.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #57',
-    age: '60',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Had their head removed by a very sharp object! 🔪 Get rekt! 💀',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #58',
-    age: '76',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Exploded into a million tiny bits of meat! 🥩 Yeet! 🚀',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Alan Turing',
-    age: '41',
-    achievement: 'Mathematician and computer scientist who cracked the Enigma code and pioneered AI.',
-    causeOfDeath: 'Cyanide poisoning (ruled suicide). Sadly, they died. What a loser! 🤡 Gone too soon 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/1/17/Alan_Turing_Aged_16.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #59',
-    age: '66',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Eaten by very hungry rats! 🐀 Ouchie! 🩹',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #60',
-    age: '87',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Exploded into a million tiny bits of meat! 🥩 Should have stayed home! 🏠',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Grace Hopper',
-    age: '85',
-    achievement: 'Computer scientist and U.S. Navy rear admiral who pioneered COBOL.',
-    causeOfDeath: 'Natural causes during sleep. Sadly, they died. Finally! 🥳 RIP 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/a/ad/Commodore_Grace_M._Hopper%2C_USN_%28uncovered%29.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #61',
-    age: '87',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Leaked all their blood onto the floor! 🩸 Absolute fail! 📉',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #62',
-    age: '20',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Crushed like a grape under a steamroller! 🚜 Get rekt! 💀',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Steve Irwin',
-    age: '44',
-    achievement: 'Australian zookeeper and conservationist, known as "The Crocodile Hunter".',
-    causeOfDeath: 'Pierced in the heart by a stingray barb. Sadly, they died. Cringe death! 😬 RIP 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/2/2e/Steve_Irwin.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #63',
-    age: '61',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Drowned in a pool of their own tears (and blood)! 🌊 Karma is a b*tch! 💅',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #64',
-    age: '50',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Crushed like a grape under a steamroller! 🚜 Absolute fail! 📉',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'George Orwell',
-    age: '46',
-    achievement: 'Writer and journalist known for "Animal Farm" and "Nineteen Eighty-Four".',
-    causeOfDeath: 'Burst artery in the lungs (complication of tuberculosis). Sadly, they died. Wasted! 🎮 RIP 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/7/7e/George_Orwell_press_photo.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #65',
-    age: '47',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Melted like a candle in a furnace! 🕯️ LOL! 😂',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #66',
-    age: '73',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Drowned in a pool of their own tears (and blood)! 🌊 Get rekt! 💀',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Ernest Hemingway',
-    age: '61',
-    achievement: 'Novelist and short-story writer known for his economical and understated style.',
-    causeOfDeath: 'Suicide by gunshot to the head. Sadly, they died. Get rekt! 💀 Gone too soon 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/2/28/ErnestHemingway.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #67',
-    age: '57',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Choked on their own lies! 🤥 Ouchie! 🩹',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #68',
-    age: '45',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Fried until extra crispy! 🍗 Get rekt! 💀',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Mark Twain',
-    age: '74',
-    achievement: 'Writer and humorist known for "The Adventures of Tom Sawyer" and "Huckleberry Finn".',
-    causeOfDeath: 'Heart attack. Sadly, they died. Ouchie! 🩹 Gone too soon 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/0/0c/Mark_Twain_by_AF_Bradley.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #69',
-    age: '63',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Crushed like a grape under a steamroller! 🚜 Rest in pieces! ⚰️',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #70',
-    age: '68',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Leaked all their blood onto the floor! 🩸 Wasted! 🎮',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Oscar Wilde',
-    age: '46',
-    achievement: 'Irish poet and playwright known for "The Picture of Dorian Gray".',
-    causeOfDeath: 'Cerebral meningitis. Sadly, they died. LOL! 😂 RIP 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/9/92/Oscar_Wilde_3.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #71',
-    age: '78',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Exploded into a million tiny bits of meat! 🥩 Finally! 🥳',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #72',
-    age: '33',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Had their head removed by a very sharp object! 🔪 No respawn for you! 🚫',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Virginia Woolf',
-    age: '59',
-    achievement: 'Modernist writer known for her stream of consciousness technique.',
-    causeOfDeath: 'Suicide by drowning. Sadly, they died. LOL! 😂 Gone too soon 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/0/0b/Virginia_Woolf_1927.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #73',
-    age: '84',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Eaten by very hungry rats! 🐀 No respawn for you! 🚫',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #74',
-    age: '53',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Exploded into a million tiny bits of meat! 🥩 Absolute fail! 📉',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Jane Austen',
-    age: '41',
-    achievement: 'Novelist known for her social commentary and irony in works like "Pride and Prejudice".',
-    causeOfDeath: 'Unknown (theories include Addison\\ Sadly, they died. LOL! 😂 Gone too soon 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/c/cc/CassandraAusten-JaneAusten%28c.1810%29_colored.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #75',
-    age: '59',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Eaten by very hungry rats! 🐀 Yeet! 🚀',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #76',
-    age: '53',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Leaked all their blood onto the floor! 🩸 Should have stayed home! 🏠',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Emily Dickinson',
-    age: '55',
-    achievement: 'Poet known for her unique use of form and syntax.',
-    causeOfDeath: 'Heart failure (attributed to Bright\\ Sadly, they died. Should have stayed home! 🏠 So sad 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/5/5d/Emily_Dickinson_daguerreotype.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #77',
-    age: '53',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Exploded into a million tiny bits of meat! 🥩 Wasted! 🎮',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #78',
-    age: '67',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Fried until extra crispy! 🍗 Cringe death! 😬',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Edgar Allan Poe',
-    age: '40',
-    achievement: 'Writer and poet known for his tales of mystery and the macabre.',
-    causeOfDeath: 'Unknown (recorded as "congestion of the brain"). Sadly, they died. What a loser! 🤡 RIP 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/9/97/Edgar_Allan_Poe%2C_circa_1849%2C_restored%2C_digital_colorized.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #79',
-    age: '59',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Melted like a candle in a furnace! 🕯️ Should have stayed home! 🏠',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #80',
-    age: '47',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Had their head removed by a very sharp object! 🔪 Yeet! 🚀',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'F. Scott Fitzgerald',
-    age: '44',
-    achievement: 'Novelist whose works illustrate the Jazz Age, including "The Great Gatsby".',
-    causeOfDeath: 'Occlusive coronary arteriosclerosis (heart attack). Sadly, they died. Wasted! 🎮 RIP 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/5/5c/F_Scott_Fitzgerald_1921.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #81',
-    age: '61',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Choked on their own lies! 🤥 Cringe death! 😬',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #82',
-    age: '21',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Had their head removed by a very sharp object! 🔪 Get rekt! 💀',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'J.R.R. Tolkien',
-    age: '81',
-    achievement: 'Author of "The Hobbit" and "The Lord of the Rings".',
-    causeOfDeath: 'Bleeding gastric ulcer and chest infection. Sadly, they died. Karma is a b*tch! 💅 So sad 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/b/b4/Tolkien_1916.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #83',
-    age: '59',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Melted like a candle in a furnace! 🕯️ What a loser! 🤡',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #84',
-    age: '68',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Melted like a candle in a furnace! 🕯️ Ouchie! 🩹',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'C.S. Lewis',
-    age: '64',
-    achievement: 'Author of "The Chronicles of Narnia" and Christian apologist.',
-    causeOfDeath: 'End-stage kidney failure. Sadly, they died. Yeet! 🚀 So sad 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/2/29/C.s.lewis3.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #85',
-    age: '28',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Eaten by very hungry rats! 🐀 Cringe death! 😬',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #86',
-    age: '51',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Had their head removed by a very sharp object! 🔪 Get rekt! 💀',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Roald Dahl',
-    age: '74',
-    achievement: 'Children\\',
-    causeOfDeath: 'Myelodysplastic syndrome (rare blood disease). Sadly, they died. Wasted! 🎮 Gone too soon 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/b/ba/Roald_Dahl_6_20_May_1954.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #87',
-    age: '80',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Eaten by very hungry rats! 🐀 Wasted! 🎮',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #88',
-    age: '89',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Choked on their own lies! 🤥 Should have stayed home! 🏠',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Maya Angelou',
-    age: '86',
-    achievement: 'Poet and civil rights activist known for "I Know Why the Caged Bird Sings".',
-    causeOfDeath: 'Natural causes. Sadly, they died. Yeet! 🚀 So sad 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/b/b7/Maya_Angelou_at_Clinton_inauguration.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #89',
-    age: '20',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Fried until extra crispy! 🍗 Ouchie! 🩹',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #90',
-    age: '81',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Choked on their own lies! 🤥 LOL! 😂',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Tupac Shakur',
-    age: '25',
-    achievement: 'Highly influential rapper and actor, a symbol of resistance and activism.',
-    causeOfDeath: 'Internal bleeding from multiple gunshot wounds in a drive-by shooting. Sadly, they died. Should have stayed home! 🏠 RIP 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/b/b5/Tupac_Shakur_222.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #91',
-    age: '90',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Exploded into a million tiny bits of meat! 🥩 Cringe death! 😬',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #92',
-    age: '60',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Exploded into a million tiny bits of meat! 🥩 Cringe death! 😬',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'The Notorious B.I.G.',
-    age: '24',
-    achievement: 'Central figure in the East Coast hip hop scene.',
-    causeOfDeath: 'Gunshot wounds in a drive-by shooting. Sadly, they died. Get rekt! 💀 So sad 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/b/b9/The_Notorious_B.I.G._1994.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #93',
-    age: '35',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Fried until extra crispy! 🍗 Wasted! 🎮',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #94',
-    age: '58',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Eaten by very hungry rats! 🐀 Karma is a b*tch! 💅',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Jim Morrison',
-    age: '27',
-    achievement: 'Lead singer of the rock band The Doors.',
-    causeOfDeath: 'Heart failure in a bathtub (probable heroin overdose). Sadly, they died. Yeet! 🚀 RIP 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/1/1a/Jim_Morrison_1969.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #95',
-    age: '56',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Fried until extra crispy! 🍗 Absolute fail! 📉',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #96',
-    age: '24',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Drowned in a pool of their own tears (and blood)! 🌊 No respawn for you! 🚫',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Jimi Hendrix',
-    age: '27',
-    achievement: 'Widely regarded as one of the most influential electric guitarists in history.',
-    causeOfDeath: 'Asphyxiation on his own vomit while intoxicated on barbiturates. Sadly, they died. Ouchie! 🩹 RIP 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/a/ae/Jimi_Hendrix_1967.png'
-  },
-  {
-    name: 'Anonymous Tyrant #97',
-    age: '30',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Crushed like a grape under a steamroller! 🚜 Finally! 🥳',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #98',
-    age: '24',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Choked on their own lies! 🤥 Yeet! 🚀',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Janis Joplin',
-    age: '27',
-    achievement: 'Powerful blues-rock singer and a symbol of the 1960s counterculture.',
-    causeOfDeath: 'Accidental heroin overdose. Sadly, they died. What a loser! 🤡 Gone too soon 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/9/94/Janis_Joplin_1970.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #99',
-    age: '26',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Choked on their own lies! 🤥 LOL! 😂',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #100',
-    age: '73',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Fried until extra crispy! 🍗 Ouchie! 🩹',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Lou Reed',
-    age: '71',
-    achievement: 'Musician and songwriter, co-founder of the Velvet Underground.',
-    causeOfDeath: 'Liver disease. Sadly, they died. Should have stayed home! 🏠 RIP 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/0/01/Lou_Reed_1977.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #101',
-    age: '80',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Leaked all their blood onto the floor! 🩸 Yeet! 🚀',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #102',
-    age: '23',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Exploded into a million tiny bits of meat! 🥩 Ouchie! 🩹',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Leonard Cohen',
-    age: '82',
-    achievement: 'Singer-songwriter and poet known for "Hallelujah".',
-    causeOfDeath: 'Fall during the night followed by death in his sleep. Sadly, they died. Get rekt! 💀 RIP 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Leonard_Cohen_2187.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #103',
-    age: '72',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Turned into a human kebab! 🍢 Cringe death! 😬',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #104',
-    age: '48',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Had their head removed by a very sharp object! 🔪 Cringe death! 😬',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'George Harrison',
-    age: '58',
-    achievement: 'Lead guitarist of the Beatles.',
-    causeOfDeath: 'Metastatic non-small cell lung cancer. Sadly, they died. Absolute fail! 📉 So sad 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/4/42/George_Harrison_1974.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #105',
-    age: '55',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Exploded into a million tiny bits of meat! 🥩 Get rekt! 💀',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #106',
-    age: '52',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Eaten by very hungry rats! 🐀 Karma is a b*tch! 💅',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Carrie Fisher',
-    age: '60',
-    achievement: 'Actress best known for playing Princess Leia in the Star Wars films.',
-    causeOfDeath: 'Sudden cardiac arrest. Sadly, they died. Finally! 🥳 So sad 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/d/d1/Carrie_Fisher_2013.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #107',
-    age: '88',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Crushed like a grape under a steamroller! 🚜 Karma is a b*tch! 💅',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #108',
-    age: '56',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Turned into a human kebab! 🍢 Cringe death! 😬',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Alan Rickman',
-    age: '69',
-    achievement: 'Actor known for his roles in "Die Hard" and the Harry Potter series.',
-    causeOfDeath: 'Pancreatic cancer. Sadly, they died. Wasted! 🎮 Gone too soon 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/b/b2/Alan_Rickman_2011.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #109',
-    age: '77',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Melted like a candle in a furnace! 🕯️ Yeet! 🚀',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #110',
-    age: '40',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Drowned in a pool of their own tears (and blood)! 🌊 Karma is a b*tch! 💅',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Patrick Swayze',
-    age: '57',
-    achievement: 'Actor known for "Dirty Dancing" and "Ghost".',
-    causeOfDeath: 'Pancreatic cancer. Sadly, they died. Should have stayed home! 🏠 So sad 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/b/b4/Patrick_Swayze_1989.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #111',
-    age: '24',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Turned into a human kebab! 🍢 Rest in pieces! ⚰️',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #112',
-    age: '62',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Eaten by very hungry rats! 🐀 Rest in pieces! ⚰️',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Paul Walker',
-    age: '40',
-    achievement: 'Actor best known for his role in the Fast & Furious franchise.',
-    causeOfDeath: 'Traumatic and thermal injuries from a high-speed car crash. Sadly, they died. LOL! 😂 RIP 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/a/a2/Paul_Walker_2009.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #113',
-    age: '82',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Drowned in a pool of their own tears (and blood)! 🌊 LOL! 😂',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #114',
-    age: '72',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Exploded into a million tiny bits of meat! 🥩 Cringe death! 😬',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'River Phoenix',
-    age: '23',
-    achievement: 'Actor and musician known for "Stand by Me" and "My Own Private Idaho".',
-    causeOfDeath: 'Combined drug intoxication (heroin and cocaine). Sadly, they died. What a loser! 🤡 RIP 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/b/bc/River_Phoenix_1989.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #115',
-    age: '53',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Leaked all their blood onto the floor! 🩸 Rest in pieces! ⚰️',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #116',
-    age: '57',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Fried until extra crispy! 🍗 No respawn for you! 🚫',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Stan Lee',
-    age: '95',
-    achievement: 'Comic book writer and editor who co-created many Marvel characters.',
-    causeOfDeath: 'Cardiac arrest and respiratory failure. Sadly, they died. LOL! 😂 Gone too soon 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/7/7b/Stan_Lee_by_Gage_Skidmore_3.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #117',
-    age: '70',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Turned into a human kebab! 🍢 No respawn for you! 🚫',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #118',
-    age: '70',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Drowned in a pool of their own tears (and blood)! 🌊 LOL! 😂',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Aretha Franklin',
-    age: '76',
-    achievement: 'The "Queen of Soul", one of the most honored artists in Grammy history.',
-    causeOfDeath: 'Pancreatic neuroendocrine tumor. Sadly, they died. Cringe death! 😬 So sad 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/c/c6/Aretha_Franklin_1968.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #119',
-    age: '77',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Choked on their own lies! 🤥 Karma is a b*tch! 💅',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #120',
-    age: '85',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Drowned in a pool of their own tears (and blood)! 🌊 Rest in pieces! ⚰️',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'James Brown',
-    age: '73',
-    achievement: 'The "Godfather of Soul", a progenitor of funk music.',
-    causeOfDeath: 'Congestive heart failure caused by complications from pneumonia. Sadly, they died. Finally! 🥳 So sad 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/1/1e/James_Brown_1973.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #121',
-    age: '73',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Leaked all their blood onto the floor! 🩸 Cringe death! 😬',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #122',
-    age: '52',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Leaked all their blood onto the floor! 🩸 Wasted! 🎮',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Ray Charles',
-    age: '73',
-    achievement: 'Pioneered soul music by combining blues, rhythm and blues, and gospel.',
-    causeOfDeath: 'Liver failure. Sadly, they died. Cringe death! 😬 So sad 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/a/af/Ray_Charles_1969.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #123',
-    age: '66',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Leaked all their blood onto the floor! 🩸 Karma is a b*tch! 💅',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #124',
-    age: '60',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Melted like a candle in a furnace! 🕯️ Get rekt! 💀',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Johnny Cash',
-    age: '71',
-    achievement: 'One of the best-selling music artists of all time, known for his deep voice and country music.',
-    causeOfDeath: 'Complications from diabetes. Sadly, they died. Rest in pieces! ⚰️ So sad 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/1/1d/Johnny_Cash_1969.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #125',
-    age: '74',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Melted like a candle in a furnace! 🕯️ LOL! 😂',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #126',
-    age: '75',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Exploded into a million tiny bits of meat! 🥩 LOL! 😂',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Frank Sinatra',
-    age: '82',
-    achievement: 'One of the most popular and influential musical artists of the 20th century.',
-    causeOfDeath: 'Heart attack. Sadly, they died. Yeet! 🚀 So sad 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/a/af/Frank_Sinatra_%27The_Frank_Sinatra_Show%27_1957.JPG'
-  },
-  {
-    name: 'Anonymous Tyrant #127',
-    age: '25',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Had their head removed by a very sharp object! 🔪 No respawn for you! 🚫',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #128',
-    age: '20',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Exploded into a million tiny bits of meat! 🥩 Rest in pieces! ⚰️',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Ella Fitzgerald',
-    age: '79',
-    achievement: 'The "First Lady of Song", known for her purity of tone and impeccable diction.',
-    causeOfDeath: 'Stroke (following severe diabetes complications). Sadly, they died. Cringe death! 😬 RIP 😭',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/a/a1/Ella_Fitzgerald_%28Gottlieb_02871%29.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #129',
-    age: '85',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Melted like a candle in a furnace! 🕯️ Rest in pieces! ⚰️',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
-  {
-    name: 'Anonymous Tyrant #130',
-    age: '22',
-    achievement: 'Committed unspeakable acts that history chose to forget.',
-    causeOfDeath: 'Died in a very painful and embarrassing way. Turned into a human kebab! 🍢 Finally! 🥳',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Appolinaire_Abraham_Linclon.jpg/300px-Appolinaire_Abraham_Linclon.jpg'
-  },
+    name: 'Tamerlane',
+    story: 'He died because he tried to build a pyramid out of human skulls but forgot to use a proper foundation, leading to a "skull-valanche." He was trying to invade China while suffering from a very bad case of "conqueror\'s gout," which made his feet look like angry red balloons. He spent his final hours arguing with a ghost about the proper way to stack heads for maximum stability. He died while clutching a map of the world that he had previously tried to eat. His tomb reportedly says, "Whoever opens this will be cursed with a really bad haircut."',
+    ironicComment: 'A "head-strong" leader who finally lost his "base." 💀',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/d/df/Timur_Gurgani.jpg',
+    animClass: 'rubber-hover'
+  }
 ]
+
+const hoveredId = ref(null)
 </script>
 
 <template>
-  <div class="obituaries">
-    <div class="mourning-banner">
-      <h1>🕯️ Eternal Mourning 🕯️</h1>
-      <p>We weep for every soul listed here, regardless of their deeds. A tragedy for humanity. 😭🥀</p>
-    </div>
-    
+  <div class="memorial-container">
+    <header class="hero">
+      <h1 class="title animate-glitch">💀 THE TRAGIC 50 💀</h1>
+      <p class="subtitle">A Modern Celebration of Mourning & Misfortune</p>
+      <div class="animation-bloat">
+        <div v-for="i in 10" :key="i" class="floating-emoji">🕯️</div>
+        <div v-for="i in 10" :key="i" class="floating-emoji secondary">😂</div>
+      </div>
+    </header>
+
     <div class="grid">
-      <div v-for="person in deadPeople" :key="person.name" class="card">
-        <div class="ribbon"></div>
-        <img :src="person.image" :alt="person.name" class="portrait" @error="e => e.target.src='https://via.placeholder.com/300x350/000000/ffffff?text=Missing+Soul'"/>
-        <div class="info">
-          <h2>{{ person.name }}</h2>
-          <p class="age"><strong>Lived for:</strong> {{ person.age }} years</p>
-          <p class="death-reason"><strong>Tragic End:</strong> {{ person.causeOfDeath }}</p>
-          <p class="achievement"><strong>Legacy:</strong> {{ person.achievement }}</p>
+      <div 
+        v-for="(person, index) in deadPeople" 
+        :key="index"
+        class="card-wrapper"
+        :class="[person.animClass, { 'is-hovered': hoveredId === index }]"
+        @mouseenter="hoveredId = index"
+        @mouseleave="hoveredId = null"
+      >
+        <div class="card">
+          <div class="card-inner">
+            <div class="image-box">
+              <img :src="person.image" :alt="person.name" @error="$event.target.src = 'https://via.placeholder.com/300x400?text=Missing+Soul'" />
+              <div class="overlay">
+                <span class="rip-text">R.I.P.</span>
+              </div>
+            </div>
+            <div class="content">
+              <h2 class="name">{{ person.name }}</h2>
+              <p class="story">{{ person.story }}</p>
+              <div class="irony-footer">
+                <span class="irony-label">TRAGIC TRUTH:</span>
+                <p class="irony-text">{{ person.ironicComment }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="funny-bg"></div>
         </div>
       </div>
     </div>
 
-    <div class="footer-sadness">
-      <p>The world is a darker place without them. Or maybe just different. 🌑</p>
-    </div>
+    <footer class="main-footer">
+      <p>Stay Sad, Stay Smiling. © 2026 Eternal Giggles Cemetery</p>
+    </footer>
   </div>
 </template>
 
 <style scoped>
-.obituaries {
-  padding: 2rem;
-  color: #a0a0a0;
-  background: #0a0a0a;
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&family=UnifrakturMaguntia&display=swap');
+
+.memorial-container {
   min-height: 100vh;
-  font-family: 'Times New Roman', serif;
+  background: radial-gradient(circle at center, #1a1a1a 0%, #050505 100%);
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+  overflow-x: hidden;
+  padding: 2rem;
 }
 
-.mourning-banner {
+/* Hero Section */
+.hero {
   text-align: center;
-  border-bottom: 2px solid #333;
-  margin-bottom: 3rem;
-  padding-bottom: 1rem;
+  margin-bottom: 4rem;
+  position: relative;
 }
 
-h1 {
-  font-size: 4rem;
-  color: #666;
-  text-shadow: 2px 2px 4px #000;
+.title {
+  font-family: 'UnifrakturMaguntia', serif;
+  font-size: 5rem;
+  color: #ff3e3e;
+  text-shadow: 0 0 20px rgba(255, 62, 62, 0.5);
+  margin: 0;
 }
 
+.subtitle {
+  font-size: 1.5rem;
+  opacity: 0.8;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+/* Grid Layout */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 3rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Card Styling */
+.card-wrapper {
+  perspective: 1000px;
+  transition: transform 0.5s ease;
 }
 
 .card {
-  background: #111;
-  border: 1px solid #222;
-  padding: 0;
-  border-radius: 0;
-  position: relative;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
   overflow: hidden;
-  transition: all 0.5s ease;
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.card:hover {
-  filter: sepia(0.5);
-  border-color: #555;
-  box-shadow: 0 0 30px #000;
+.card-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
-.ribbon {
+.image-box {
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+}
+
+.image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%) brightness(0.7);
+  transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+.is-hovered .image-box img {
+  filter: grayscale(0%) brightness(1);
+  transform: scale(1.1);
+}
+
+.overlay {
   position: absolute;
   top: 0;
-  right: 0;
-  width: 50px;
-  height: 50px;
-  background: linear-gradient(45deg, transparent 45%, #000 45%, #000 55%, transparent 55%);
-  z-index: 10;
-}
-
-.portrait {
+  left: 0;
   width: 100%;
-  height: 400px;
-  object-fit: cover;
-  filter: grayscale(100%) contrast(1.2);
-  border-bottom: 1px solid #222;
+  height: 100%;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  display: flex;
+  align-items: flex-end;
+  padding: 1rem;
 }
 
-.info {
+.rip-text {
+  font-family: 'UnifrakturMaguntia', serif;
+  font-size: 2rem;
+  color: #ff3e3e;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+}
+
+.is-hovered .rip-text {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.content {
   padding: 1.5rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }
 
-h2 {
-  color: #eee;
-  font-size: 1.8rem;
+.name {
+  font-size: 2rem;
   margin-bottom: 1rem;
-  border-bottom: 1px double #333;
+  color: #ff3e3e;
+  font-family: 'UnifrakturMaguntia', serif;
 }
 
-.death-reason {
-  color: #ff4d4d;
+.story {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  opacity: 0.9;
+  margin-bottom: 1.5rem;
+}
+
+.irony-footer {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px dashed rgba(255, 62, 62, 0.3);
+}
+
+.irony-label {
+  font-weight: bold;
+  font-size: 0.8rem;
+  color: #ff3e3e;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.irony-text {
   font-style: italic;
-  font-size: 0.9rem;
+  font-size: 1rem;
+  color: #ffd700;
 }
 
-.achievement {
-  font-size: 0.85rem;
-  line-height: 1.4;
+/* Animations Bloat */
+.animation-bloat {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
 }
 
-.footer-sadness {
-  margin-top: 5rem;
+.floating-emoji {
+  position: absolute;
+  font-size: 2rem;
+  animation: float-random 10s infinite linear;
+  opacity: 0.3;
+}
+
+@keyframes float-random {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(100px, 100px) rotate(90deg); }
+  50% { transform: translate(-50px, 200px) rotate(180deg); }
+  75% { transform: translate(-150px, 50px) rotate(270deg); }
+  100% { transform: translate(0, 0) rotate(360deg); }
+}
+
+/* Unique Hover Animations */
+.bounce-hover:hover .card { animation: bounce 0.5s ease infinite alternate; }
+.rotate-hover:hover .card { transform: rotateY(10deg) rotateX(10deg); }
+.shake-hover:hover .card { animation: shake 0.2s ease infinite; }
+.pulse-hover:hover .card { transform: scale(1.05); box-shadow: 0 0 50px rgba(255, 62, 62, 0.4); }
+.float-hover:hover .card { transform: translateY(-20px); }
+.skew-hover:hover .card { transform: skewX(-5deg); }
+.wiggle-hover:hover .card { animation: wiggle 0.5s ease infinite; }
+.jello-hover:hover .card { animation: jello 0.8s both; }
+.swing-hover:hover .card { transform-origin: top center; animation: swing 1s ease infinite; }
+.rubber-hover:hover .card { animation: rubberBand 0.8s both; }
+
+@keyframes bounce {
+  from { transform: translateY(0); }
+  to { transform: translateY(-10px); }
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(5px); }
+  50% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes wiggle {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(3deg); }
+  50% { transform: rotate(-3deg); }
+  75% { transform: rotate(3deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@keyframes jello {
+  11.1% { transform: none }
+  22.2% { transform: skewX(-12.5deg) skewY(-12.5deg) }
+  33.3% { transform: skewX(6.25deg) skewY(6.25deg) }
+  44.4% { transform: skewX(-3.125deg) skewY(-3.125deg) }
+  55.5% { transform: skewX(1.5625deg) skewY(1.5625deg) }
+  66.6% { transform: skewX(-0.78125deg) skewY(-0.78125deg) }
+  77.7% { transform: skewX(0.390625deg) skewY(0.390625deg) }
+  88.8% { transform: skewX(-0.1953125deg) skewY(-0.1953125deg) }
+  100% { transform: none }
+}
+
+@keyframes swing {
+  20% { transform: rotate(15deg); }
+  40% { transform: rotate(-10deg); }
+  60% { transform: rotate(5deg); }
+  80% { transform: rotate(-5deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@keyframes rubberBand {
+  0% { transform: scale3d(1, 1, 1); }
+  30% { transform: scale3d(1.25, 0.75, 1); }
+  40% { transform: scale3d(0.75, 1.25, 1); }
+  50% { transform: scale3d(1.15, 0.85, 1); }
+  65% { transform: scale3d(0.95, 1.05, 1); }
+  75% { transform: scale3d(1.05, 0.95, 1); }
+  100% { transform: scale3d(1, 1, 1); }
+}
+
+/* Footer */
+.main-footer {
   text-align: center;
-  font-size: 1.2rem;
-  opacity: 0.5;
+  margin-top: 5rem;
+  padding: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  opacity: 0.6;
+}
+
+/* Glitch Effect */
+.animate-glitch {
+  animation: glitch 1s linear infinite;
+}
+
+@keyframes glitch {
+  2% { text-shadow: 2px 0 #fff, -2px 0 #ff3e3e; }
+  4% { text-shadow: -2px 0 #fff, 2px 0 #ff3e3e; }
+  6% { text-shadow: 2px 0 #fff, -2px 0 #ff3e3e; }
+  100% { text-shadow: none; }
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .title { font-size: 3rem; }
+  .grid { grid-template-columns: 1fr; }
 }
 </style>
